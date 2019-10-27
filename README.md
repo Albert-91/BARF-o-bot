@@ -16,7 +16,7 @@ Development models is not part of repo and their contains `_dev` suffix. Product
 $ rasa train --data data --config config/config.yml --domain config/domain.yml --out models --fixed-model-name model_dev
 ```
 
-#### Training production model command (model will be generated as `models/model_dev.tar.gz`): 
+#### Training production model command (model will be generated as `models/model_prod.tar.gz`): 
 ```bash
 $ rasa train --data data --config config/config.yml --domain config/domain.yml --out models --fixed-model-name model_prod
 ```

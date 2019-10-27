@@ -3,12 +3,11 @@ from json import JSONDecodeError
 from typing import Text
 
 import requests
-from requests import RequestException
-
 from rasa.constants import DEFAULT_CREDENTIALS_PATH
 from rasa.utils.io import read_config_file
 from rasa_sdk import Action
-from rasa_sdk.events import SlotSet, ActionExecuted, UserUttered, Form
+from rasa_sdk.events import SlotSet, ActionExecuted, UserUttered, AllSlotsReset
+from requests import RequestException
 
 
 class CommonActionMixin:
@@ -87,57 +86,25 @@ class GetFacebookUserProfileDataAction(Action):
         return []
 
 
-class StartShowcaseModeAction(Action):
+class AnythingElseAction(Action):
     """Initiates a showcase mode"""
 
     def name(self):
-        return 'action_start_showcase'
+        return 'action_anything_else'
 
     def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_template('utter_showcase_menu', tracker)
+        dispatcher.utter_template('utter_anything_else', tracker)
         # resets slots used for showcase scenarios to ensure start it fresh again
-        return [SlotSet('vehicle_type', None), SlotSet('vehicle_age', None),
-                SlotSet('loan_amount', None), SlotSet('loan_length', None)]
+        return [SlotSet('meat_amount', None)]
 
 
-class StartConversationModeAction(Action):
-    """Initiates a play-with-bot mode"""
-
-    def name(self):
-        return 'action_start_play_with_bot'
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_template('utter_play_with_bot_intro', tracker)
-        return []
-
-
-class ShowcaseSolveProblemAction(Action):
-    """Initiates a play-with-bot mode"""
-
-    def name(self):
-        return 'action_showcase_solve_problems'
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_template('utter_showcase_solve_problems_intro', tracker)
-        return []
-
-
-class InjectIntentStartCarLoanFormAction(CommonActionMixin, Action):
-    """Injects intent `start_car_loan_form` to the tracker so stories may handle it accordingly to scenarion neeeds"""
+class InjectIntentStartBuyProductsFormAction(CommonActionMixin, Action):
+    """Injects intent `start_buy_products` to the tracker so stories may handle it accordingly to scenarion neeeds"""
     def name(self) -> Text:
-        return 'action_inject_intent_start_car_loan_form'
+        return 'action_inject_intent_start_buy_products'
 
     def run(self, dispatcher, tracker, domain):
-        return self.inject_intent('start_car_loan_form')
-
-
-class InjectIntentStartSolveProblem(CommonActionMixin, Action):
-    """Injects intent `start_solve_problem` to the tracker so stories may handle it accordingly to scenarion neeeds"""
-    def name(self) -> Text:
-        return 'action_inject_intent_start_solve_problem'
-
-    def run(self, dispatcher, tracker, domain):
-        return self.inject_intent('start_solve_problem')
+        return self.inject_intent('start_buy_products')
 
 
 class UtterWrongRequestedSlotValueAction(Action):

@@ -34,9 +34,9 @@ pipeline:  # based on supervised_embeddings pipeline
   timezone: "Europe/Berlin"  # if not set the default timezone of Duckling is going to be used
                              # needed to calculate dates from relative expressions like "tomorrow"
   dimensions:  # dimensions to extract as entities
-  - email  # i.e. help@finderstand.com
+  - email  # i.e. help@abc.com
   - phone-number  # i.e. 415-123-3444 / +33 4 76095663
-  - url  # i.e. http://finderstand.com
+  - url  # i.e. http://abc.com
   - time  # i.e. jutro / 11:45 / w następny piątek
   - duration  # i.e. dwie godziny / 10 miesięcy
   - number  # i.e. 0.77 / 123 / osiem / 100K

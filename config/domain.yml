@@ -5,9 +5,9 @@ entities:                                                                       
 # ---------------------------------------------------------------------------------------------------------------------#
 
 # entities provided by duckling
-- email  # i.e. help@finderstand.com
+- email  # i.e. help@abc.com
 - phone-number  # i.e. 415-123-3444 / +33 4 76095663
-- url  # i.e. http://finderstand.com
+- url  # i.e. http://abc.com
 - time  # i.e. jutro / 11:45 / w następny piątek
 - duration  # i.e. 2 godziny / 10 miesięcy
 - number  # i.e. 0.77 / 123 / osiem / 100K
@@ -225,7 +225,7 @@ templates:                                                                      
   - text: Super, napisz mi o tym!
 
   utter_thanks_for_feedback:
-  - text: Dziękuję za informację zwrotną, wykorzystam ją, aby Finderstand spełniał jeszcze bardziej Twoje potrzeby i oczekwiania!
+  - text: Dziękuję za informację zwrotną, wykorzystam ją, aby BARF-o-bot spełniał jeszcze bardziej Twoje potrzeby i oczekwiania!
 
 # proprietary templates
   utter_menu:

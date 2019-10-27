@@ -75,7 +75,7 @@ class DefaultAskAffirmationAction(Action):
         return button_title.format(**entities)
 
 
-class ActionMixinDefaultFallback(CommonActionMixin, Action):
+class ActionDefaultFallback(CommonActionMixin, Action):
     """
     Special version of default fallback action that "extends" Rasa for very missing feature - generic `out_of_scope`
     intent that this action injects into tracker (as if were "fired" by user input processing) so it may be handled

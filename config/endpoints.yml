@@ -1,7 +1,7 @@
 action_endpoint:
-  url: "http://actions_pl:5055/webhook"
+  url: "http://actions:5055/webhook"
 
 tracker_store:
     type: SQL
     dialect: "sqlite"
-    db: "db/finderstand_pl.db"
+    db: "db/barfobot.db"

@@ -230,8 +230,8 @@ config/prod.credentials.yml
 models/*
 !models/model.tar.gz
 
-# finderstand logs
+# barf-o-bot logs
 logs/*
 
-# finderstand db's
+# barf-o-bot db's
 db/*

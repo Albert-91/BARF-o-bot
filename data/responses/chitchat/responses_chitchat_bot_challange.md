@@ -6,7 +6,7 @@
   
 ## user ask for making acquaintance
 * chitchat/user_wants_acquaintance
-  - Jestem chatbotem demonstracyjnym Finderstand. Moim celem jest przedstawienie Ci w jaki sposób mogę pomóc Twojej firmie w automatyzacji komunikacji z Klientami.
+  - Jestem BARF-o-botem.
 
 ## user ask for agent ag
 * chitchat/user_ask_age

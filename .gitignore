@@ -228,10 +228,10 @@ config/prod.credentials.yml
 
 # ignore only non-production models
 models/*
-!models/model.tar.gz
+!models/model_prod.tar.gz
 
-# finderstand logs
+# barf-o-bot logs
 logs/*
 
-# finderstand db's
+# barf-o-bot db's
 db/*

@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   # polish version of BARF-o-bot core app
-  bot:
+  instance:
     image: rasa/rasa:latest-full
     deploy:
       replicas: 1
@@ -32,7 +32,7 @@ services:
 
   # custom action server for BARF-o-bot
   actions:
-    image: finderstand_actions:latest
+    image: barfobot_actions:latest
     deploy:
       replicas: 1
       restart_policy:
@@ -50,7 +50,7 @@ services:
     environment:
       RASA_CREDENTIALS_FILE_PATH: config/dev.credentials.yml
     depends_on:
-      - bot
+      - instance
 
   # duckling extractor service
   duckling:
@@ -68,4 +68,4 @@ services:
       - -p
       - "9000"
     depends_on:
-      - bot
+      - instance

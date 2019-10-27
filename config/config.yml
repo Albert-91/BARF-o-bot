@@ -34,9 +34,9 @@ pipeline:  # based on supervised_embeddings pipeline
   timezone: "Europe/Berlin"  # if not set the default timezone of Duckling is going to be used
                              # needed to calculate dates from relative expressions like "tomorrow"
   dimensions:  # dimensions to extract as entities
-  - email  # i.e. help@finderstand.com
+  - email  # i.e. help@abc.com
   - phone-number  # i.e. 415-123-3444 / +33 4 76095663
-  - url  # i.e. http://finderstand.com
+  - url  # i.e. http://abc.com
   - time  # i.e. jutro / 11:45 / w następny piątek
   - duration  # i.e. dwie godziny / 10 miesięcy
   - number  # i.e. 0.77 / 123 / osiem / 100K
@@ -61,18 +61,18 @@ policies:
     max_history: 5
 
 # currently not used
-  - name: TwoStageFallbackPolicy
-    nlu_threshold: 0.85
-    ambiguity_threshold: 0.1
-    core_threshold: 0.3
-    fallback_core_action_name: action_default_fallback
-    fallback_nlu_action_name: action_default_fallback
-    deny_suggestion_intent_name: out_of_scope
-
-#  - name: FallbackPolicy
+#  - name: TwoStageFallbackPolicy
 #    nlu_threshold: 0.85
 #    ambiguity_threshold: 0.1
 #    core_threshold: 0.3
-#    fallback_action_name: action_default_fallback
+#    fallback_core_action_name: action_default_fallback
+#    fallback_nlu_action_name: action_default_fallback
+#    deny_suggestion_intent_name: out_of_scope
+
+  - name: FallbackPolicy
+    nlu_threshold: 0.85
+    ambiguity_threshold: 0.1
+    core_threshold: 0.3
+    fallback_action_name: action_default_fallback
 
   - name: FormPolicy

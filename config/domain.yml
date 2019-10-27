@@ -5,9 +5,9 @@ entities:                                                                       
 # ---------------------------------------------------------------------------------------------------------------------#
 
 # entities provided by duckling
-- email  # i.e. help@finderstand.com
+- email  # i.e. help@abc.com
 - phone-number  # i.e. 415-123-3444 / +33 4 76095663
-- url  # i.e. http://finderstand.com
+- url  # i.e. http://abc.com
 - time  # i.e. jutro / 11:45 / w następny piątek
 - duration  # i.e. 2 godziny / 10 miesięcy
 - number  # i.e. 0.77 / 123 / osiem / 100K
@@ -30,10 +30,11 @@ intents:                                                                        
 - showcase_car_loan
 - feedback
 - entered_data
+- buy_products
 
 # special intents for triggering some scenario cases by intents injection into tracker
 
-
+- start_buy_products
 
 # ---------------------------------------------------------------------------------------------------------------------#
 slots:                                                                                                           # slots
@@ -84,16 +85,7 @@ slots:                                                                          
     type: unfeaturized
 
 ## form slots
-  vehicle_type:
-    type: unfeaturized
-
-  vehicle_age:
-    type: unfeaturized
-
-  loan_amount:
-    type: unfeaturized
-
-  loan_length:
+  meat_amount:
     type: unfeaturized
 
 # slot used by custom fallback action
@@ -125,6 +117,7 @@ actions:                                                                        
 - action_utter_wrong_requested_slot_value
 - action_utter_explain_requested_slot_value
 - action_reset_requested_slot
+- action_anything_else
 
 ## respond actions
 - respond_chitchat
@@ -132,16 +125,17 @@ actions:                                                                        
 ## utterance actions
 - utter_menu
 - utter_out_of_scope
-- utter_ask_stop
-- utter_prompt_showcase_car_loan_proceeding_on_faq_question
+- utter_ask_stop_buy_products
 - utter_anything_else
-- utter_ask_faq_rephrase
+- utter_buy_products_intro
+- utter_continue_buy_products
 
 - action_set_out_of_scope_detected
 - action_set_out_of_scope_not_detected
 - action_reset_out_of_scope_detected
 
 # inject intent actions
+- action_inject_intent_start_buy_products
 
 # test actions (ready to use actions for developers to quickly test sth etc).
 # (feel free to change its body if needed during your development)
@@ -152,6 +146,8 @@ actions:                                                                        
 forms:                                                                                                           # forms
 # ---------------------------------------------------------------------------------------------------------------------#
 
+- form_calculate_products_to_buy
+- form_feedback
 
 # ---------------------------------------------------------------------------------------------------------------------#
 templates:                                                                                                   # templates
@@ -171,14 +167,45 @@ templates:                                                                      
   utter_restart:
   - text: Uruchomiłeś mnie ponownie!
 
+  utter_out_of_scope:
+  - text: Przepraszam, w tym temacie Ci nie pomogę. Może spróbujmy czegoś innego?.
+  - text: Przykro mi, nie poradzę sobie z tym. Spróbujmy czegoś innego.
+  - text: Nie mogę Ci w tym pomóc, może spróbujmy czegoś innego?.
+  - text: Nawet ja nie jestem doskonały - nie dam rady spełnić tej prośby. Mogę dla Ciebie zrobić coś jeszcze?"
 
-# utter submit templates (for forms)
+# buy products form
+  utter_buy_products_intro:
+  - text: A więc zamierzasz zrobić BARFowe zakupy dla swojego psiaka...
 
+  utter_ask_stop_buy_products:
+  - text: Czy chcesz zakończyć obliczanie BARFowych zakupów?
+
+  utter_continue_buy_products:
+  - text: W takim razie kontynuujmy.
+
+# buy products form - slots
+  utter_ask_meat_amount:
+  - text: Na ile kilogramów mięsa chcesz zrobić zakupy?
+
+  utter_explain_meat_amount:
+  - text: >
+          Podaj na ile kilogramów mięsa chcesz kupić podroby, wątrobę i kości. \n\n
+          Podana wartość musi być większa od zera.
+
+  utter_wrong_meat_amount:
+    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera!
+
+# buy products form - submit
+  utter_summarize_form:
+  - text: "Ok, czas na podsumowanie! \n\n Na {meat_amount} kg mięsa, musisz kupić: \n
+          - {liver_amount} kg wątroby, \n
+          - {offal_amount} kg podrobów, \n
+          - {bones_amount} kg kości."
 
 ## templates related to feedback
   utter_ask_feedback_value:
   - text: Jak przebiegła ta rozmowa?
-    buttons:
+    quick_replies:
     - title: 👍
       payload: '/feedback{"feedback_value": "positive"}'
     - title: 👎
@@ -198,7 +225,20 @@ templates:                                                                      
   - text: Super, napisz mi o tym!
 
   utter_thanks_for_feedback:
-  - text: Dziękuję za informację zwrotną, wykorzystam ją, aby Finderstand spełniał jeszcze bardziej Twoje potrzeby i oczekwiania!
+  - text: Dziękuję za informację zwrotną, wykorzystam ją, aby BARF-o-bot spełniał jeszcze bardziej Twoje potrzeby i oczekwiania!
 
 # proprietary templates
+  utter_menu:
+  - text: Cześć {user_name}, mam na imię BARF-o-bot. Jestem chatbotem, który wprowadzi Ciebie i Twojego psa w świat BARFa, a także pomoże Ci w przygotowaniu porcji dla Twojego pupila ;)
+    quick_replies:
+    - title: Chcę zrobić zakupy!
+      payload: /buy_products
+    - title: Mam pytanie o BARF
+      # temporary it's buy_products intent
+      payload: /buy_products
 
+  utter_anything_else:
+  - text: Co chciałbyś teraz zrobić?
+    quick_replies:
+      - title: Chcę wrócić do menu
+        payload: /menu

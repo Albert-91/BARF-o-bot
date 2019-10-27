@@ -1,6 +1,6 @@
 from decimal import Decimal
 from enum import Enum
-from typing import Dict
+from typing import Dict, Text
 
 
 class ProductsRatio(Enum):
@@ -9,7 +9,7 @@ class ProductsRatio(Enum):
     BONES = 0.3
 
 
-def calculate_products_to_buy(meat_amount: Decimal) -> Dict:
+def calculate_products_to_buy(meat_amount: Decimal) -> Dict[Text, Decimal]:
     MEAT_RATIO = Decimal(1 - ProductsRatio.BONES.value - ProductsRatio.OFFAL.value - ProductsRatio.LIVER.value)
     liver_to_buy = meat_amount * Decimal(ProductsRatio.LIVER.value) / MEAT_RATIO
     offal_to_buy = meat_amount * Decimal(ProductsRatio.OFFAL.value) / MEAT_RATIO

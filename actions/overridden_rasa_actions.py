@@ -25,54 +25,55 @@ class RestartBotAction(Action):
         dispatcher.utter_template('utter_restart', tracker, silent_fail=True)
         return [Restarted(), AllSlotsReset()]
 
-# REMARK: currently not used
-class DefaultAskAffirmationAction(Action):
-    """Asks for an affirmation of the intent if NLU threshold is not met.
-       Solution adopted from rasa-demo bot."""
 
-    def name(self) -> Text:
-        return 'action_default_ask_affirmation'
-
-    def __init__(self) -> None:
-        import pandas as pd
-        intent_description_mapping_file = os.environ.get('INTENT_DESCRIPTION_MAPPING_FILE_PATH')
-        self.intent_mappings = pd.read_csv(intent_description_mapping_file, comment='#')
-        self.intent_mappings.fillna('', inplace=True)
-        self.intent_mappings.entities = self.intent_mappings.entities.map(
-            lambda entities: {e.strip() for e in entities.split(',')}
-        )
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        intent_ranking = tracker.latest_message.get('intent_ranking', [])
-        if len(intent_ranking) > 1:
-            diff_intent_confidence = intent_ranking[0].get('confidence') - intent_ranking[1].get('confidence')
-            intent_ranking = intent_ranking[:2] if diff_intent_confidence < 0.2 else intent_ranking[:1]
-        first_intent_names = [intent.get('name', '') for intent in intent_ranking
-                              if intent.get('name', '') != 'out_of_scope']
-        entities = tracker.latest_message.get('entities', [])
-        entities = {e['entity']: e['value'] for e in entities}
-        entities_json = json.dumps(entities)
-        buttons = []
-        for intent in first_intent_names:
-            logger.debug(intent)
-            logger.debug(entities)
-            buttons.append({'title': self.get_button_title(intent, entities),
-                            'payload': "/{}{}".format(intent, entities_json)})
-        buttons.append({'title': self.get_button_title('out_of_scope', entities), 'payload': '/out_of_scope'})
-        dispatcher.utter_button_message(
-            domain['templates']['utter_default_ask_affirmation_headline'][0]['text'], buttons=buttons)
-        return []
-
-    def get_button_title(self, intent: Text, entities: Dict[Text, Text]) -> Text:
-        default_utterance_query = self.intent_mappings.intent == intent
-        utterance_query = (self.intent_mappings.entities == entities.keys() & default_utterance_query)
-        utterances = self.intent_mappings[utterance_query].button.tolist()
-        if len(utterances) > 0:
-            button_title = utterances[0]
-        else:
-            utterances = self.intent_mappings[default_utterance_query].button.tolist()
-            button_title = utterances[0] if len(utterances) > 0 else intent
-        return button_title.format(**entities)
+# # REMARK: currently not used
+# class DefaultAskAffirmationAction(Action):
+#     """Asks for an affirmation of the intent if NLU threshold is not met.
+#        Solution adopted from rasa-demo bot."""
+#
+#     def name(self) -> Text:
+#         return 'action_default_ask_affirmation'
+#
+#     def __init__(self) -> None:
+#         import pandas as pd
+#         intent_description_mapping_file = os.environ.get('INTENT_DESCRIPTION_MAPPING_FILE_PATH')
+#         self.intent_mappings = pd.read_csv(intent_description_mapping_file, comment='#')
+#         self.intent_mappings.fillna('', inplace=True)
+#         self.intent_mappings.entities = self.intent_mappings.entities.map(
+#             lambda entities: {e.strip() for e in entities.split(',')}
+#         )
+#
+#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
+#         intent_ranking = tracker.latest_message.get('intent_ranking', [])
+#         if len(intent_ranking) > 1:
+#             diff_intent_confidence = intent_ranking[0].get('confidence') - intent_ranking[1].get('confidence')
+#             intent_ranking = intent_ranking[:2] if diff_intent_confidence < 0.2 else intent_ranking[:1]
+#         first_intent_names = [intent.get('name', '') for intent in intent_ranking
+#                               if intent.get('name', '') != 'out_of_scope']
+#         entities = tracker.latest_message.get('entities', [])
+#         entities = {e['entity']: e['value'] for e in entities}
+#         entities_json = json.dumps(entities)
+#         buttons = []
+#         for intent in first_intent_names:
+#             logger.debug(intent)
+#             logger.debug(entities)
+#             buttons.append({'title': self.get_button_title(intent, entities),
+#                             'payload': "/{}{}".format(intent, entities_json)})
+#         buttons.append({'title': self.get_button_title('out_of_scope', entities), 'payload': '/out_of_scope'})
+#         dispatcher.utter_button_message(
+#             domain['templates']['utter_default_ask_affirmation_headline'][0]['text'], buttons=buttons)
+#         return []
+#
+#     def get_button_title(self, intent: Text, entities: Dict[Text, Text]) -> Text:
+#         default_utterance_query = self.intent_mappings.intent == intent
+#         utterance_query = (self.intent_mappings.entities == entities.keys() & default_utterance_query)
+#         utterances = self.intent_mappings[utterance_query].button.tolist()
+#         if len(utterances) > 0:
+#             button_title = utterances[0]
+#         else:
+#             utterances = self.intent_mappings[default_utterance_query].button.tolist()
+#             button_title = utterances[0] if len(utterances) > 0 else intent
+#         return button_title.format(**entities)
 
 
 class ActionDefaultFallback(CommonActionMixin, Action):

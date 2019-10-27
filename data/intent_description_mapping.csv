@@ -1,0 +1,9 @@
+# intent_description_mapping.csv
+# button text are part of question as following: "Czy chodziło Ci o <button text>"
+intent,button,entities
+out_of_scope,Coś innego,
+affirm,Potwierdzenie,
+deny,Zaprzeczenie,
+stop,Chcę przerwać,
+chitchat,Pogawędkę,
+feedback,Feedback,

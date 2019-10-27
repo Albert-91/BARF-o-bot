@@ -1,0 +1,78 @@
+# config.yml
+---
+language: pl
+
+pipeline:  # based on supervised_embeddings pipeline
+- name: WhitespaceTokenizer
+
+- name: RegexFeaturizer
+
+- name: CRFEntityExtractor
+
+- name: EntitySynonymMapper
+
+- name: CountVectorsFeaturizer
+
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
+
+- name: EmbeddingIntentClassifier
+  epochs: 50
+  random_seed: 236971045
+
+# additional pipeline items (not a part of default supervised_embeddings pipeline)
+
+- name: ResponseSelector
+  epochs: 50
+  random_seed: 196725830
+
+- name: DucklingHTTPExtractor
+  url: http://duckling:9000  # url of the running duckling server
+  locale: "pl_PL"  # allows you to configure the locale, by default the language is used
+  timezone: "Europe/Berlin"  # if not set the default timezone of Duckling is going to be used
+                             # needed to calculate dates from relative expressions like "tomorrow"
+  dimensions:  # dimensions to extract as entities
+  - email  # i.e. help@finderstand.com
+  - phone-number  # i.e. 415-123-3444 / +33 4 76095663
+  - url  # i.e. http://finderstand.com
+  - time  # i.e. jutro / 11:45 / w następny piątek
+  - duration  # i.e. dwie godziny / 10 miesięcy
+  - number  # i.e. 0.77 / 123 / osiem / 100K
+  - amount-of-money  # i.e. 10 złotych / 100 pln 30 groszy
+  - distance  # i.e. 10 km / 2 cm
+
+policies:
+  - name: KerasPolicy
+    epochs: 200
+    batch_size: 50
+    max_training_samples: 300
+    random_seed: 2364795801  # defining seed makes reproducible, determined training results
+    featurizer:
+    - name: MaxHistoryTrackerFeaturizer
+      max_history: 5
+      state_featurizer:
+        - name: BinarySingleStateFeaturizer
+
+  - name: MappingPolicy
+
+  - name: AugmentedMemoizationPolicy
+    max_history: 5
+
+# currently not used
+  - name: TwoStageFallbackPolicy
+    nlu_threshold: 0.85
+    ambiguity_threshold: 0.1
+    core_threshold: 0.3
+    fallback_core_action_name: action_default_fallback
+    fallback_nlu_action_name: action_default_fallback
+    deny_suggestion_intent_name: out_of_scope
+
+#  - name: FallbackPolicy
+#    nlu_threshold: 0.85
+#    ambiguity_threshold: 0.1
+#    core_threshold: 0.3
+#    fallback_action_name: action_default_fallback
+
+  - name: FormPolicy

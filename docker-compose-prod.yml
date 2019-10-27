@@ -1,0 +1,71 @@
+version: '3.3'
+
+services:
+
+  # polish version of BARF-o-bot core app
+  bot:
+    image: rasa/rasa:latest-full
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./config:/app/config
+      - ./db:/app/db
+      - ./models:/app/models
+      - ./logs:/app/logs
+    ports:
+      - 5101:5005
+    command:
+      - run
+      - --debug
+      - --model
+      - "models/model_prod.tar.gz"
+      - --log-file
+      - "logs/logs_prod.txt"
+      - --endpoints
+      - "config/endpoints.yml"
+      - --cors
+      - "*"
+      - --credentials
+      - "config/prod.credentials.yml"
+
+  # custom action server for BARF-o-bot
+  actions:
+    image: finderstand_actions:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./actions:/app/actions
+      - ./config:/app/config
+      - ./utils:/app/utils
+    ports:
+      - 5102:5055
+    command:
+      - start
+      - --actions
+      - actions
+    environment:
+      RASA_CREDENTIALS_FILE_PATH: config/prod.credentials.yml
+    depends_on:
+      - bot
+
+  # duckling extractor service
+  duckling:
+    image: rasa/duckling:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    expose:
+      - 9000
+    command:
+      - duckling-example-exe
+      - --no-access-log
+      - --no-error-log
+      - -p
+      - "9000"
+    depends_on:
+      - bot

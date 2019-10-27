@@ -1,0 +1,204 @@
+# domain.yml
+---
+# ---------------------------------------------------------------------------------------------------------------------#
+entities:                                                                                                     # entities
+# ---------------------------------------------------------------------------------------------------------------------#
+
+# entities provided by duckling
+- email  # i.e. help@finderstand.com
+- phone-number  # i.e. 415-123-3444 / +33 4 76095663
+- url  # i.e. http://finderstand.com
+- time  # i.e. jutro / 11:45 / w następny piątek
+- duration  # i.e. 2 godziny / 10 miesięcy
+- number  # i.e. 0.77 / 123 / osiem / 100K
+- amount-of-money  # i.e. 10 złotych / 100 pln 30 groszy
+- distance  # i.e. 10 km / 2 cm
+
+# project entities
+- feedback_value
+
+# ---------------------------------------------------------------------------------------------------------------------#
+intents:                                                                                                       # intents
+# ---------------------------------------------------------------------------------------------------------------------#
+- chitchat
+- menu
+- out_of_scope
+- affirm
+- deny
+- stop
+- explain
+- showcase_car_loan
+- feedback
+- entered_data
+
+# special intents for triggering some scenario cases by intents injection into tracker
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------#
+slots:                                                                                                           # slots
+# ---------------------------------------------------------------------------------------------------------------------#
+
+# Rasa needs requested_slot as categorical to allow use it in stories to select right path
+# related to what is requested in dialogs. This means every slot used by forms must be put here as values
+# before can be used in stories.
+
+# Was:
+#  requested_slot:
+#    type: categorical
+#    values:
+#      - vehicle_type
+#      - vehicle_age
+#      - loan_amount
+#      - loan_length
+# Currently our fallback action and supporting stories requires unfeaturized requested_slot to work properly. Don't touch this!
+  requested_slot:
+    type: unfeaturized
+
+## config slots
+  conf.use_generic_out_of_scope_intent_injection_in_fallback_action:
+    type: bool
+    initial_value: true
+
+## runtime slots
+  user_name:
+    type: unfeaturized
+
+  user_surname:
+    type: unfeaturized
+
+  user_photo:
+    type: unfeaturized
+
+  feedback_value:
+    type: categorical
+    values:
+      - not_provided
+      - positive
+      - negative
+
+  give_feedback_message:
+    type: bool
+
+  feedback_message:
+    type: unfeaturized
+
+## form slots
+  vehicle_type:
+    type: unfeaturized
+
+  vehicle_age:
+    type: unfeaturized
+
+  loan_amount:
+    type: unfeaturized
+
+  loan_length:
+    type: unfeaturized
+
+# slot used by custom fallback action
+  out_of_scope_detected:
+    type: bool
+
+# debug slots  (ready to use actions for developers to quickly test sth etc).
+  debug_flag:
+    type: bool
+
+# ---------------------------------------------------------------------------------------------------------------------#
+actions:                                                                                                       # actions
+# ---------------------------------------------------------------------------------------------------------------------#
+
+## overridden Rasa actions
+- action_restart
+- action_default_fallback
+- action_default_ask_affirmation  # related to TwoStageFallbackPolicy
+- action_respond_faq
+
+## debug actions
+- action_debug_info
+- action_debug_1
+- action_debug_2
+- action_debug_3
+
+## project actions
+- action_get_fb_user_profile_data
+- action_utter_wrong_requested_slot_value
+- action_utter_explain_requested_slot_value
+- action_reset_requested_slot
+
+## respond actions
+- respond_chitchat
+
+## utterance actions
+- utter_menu
+- utter_out_of_scope
+- utter_ask_stop
+- utter_prompt_showcase_car_loan_proceeding_on_faq_question
+- utter_anything_else
+- utter_ask_faq_rephrase
+
+- action_set_out_of_scope_detected
+- action_set_out_of_scope_not_detected
+- action_reset_out_of_scope_detected
+
+# inject intent actions
+
+# test actions (ready to use actions for developers to quickly test sth etc).
+# (feel free to change its body if needed during your development)
+- action_test_1
+- action_test_2
+
+# ---------------------------------------------------------------------------------------------------------------------#
+forms:                                                                                                           # forms
+# ---------------------------------------------------------------------------------------------------------------------#
+
+
+# ---------------------------------------------------------------------------------------------------------------------#
+templates:                                                                                                   # templates
+# ---------------------------------------------------------------------------------------------------------------------#
+
+## templates related with default actions
+  utter_default:
+  # Temporary text for testing purposes
+  - text: --- DEFAULT FALLBACK ---
+
+  utter_default_ask_affirmation_headline:
+  - text: Chyba nie zrozumiałem 🤔 Czy Twoją intencją było...
+
+  utter_ask_rephrase:
+  - text: Nie zrozumiałem 🤔 Czy mógłbyś sformułować to trochę inaczej?
+
+  utter_restart:
+  - text: Uruchomiłeś mnie ponownie!
+
+
+# utter submit templates (for forms)
+
+
+## templates related to feedback
+  utter_ask_feedback_value:
+  - text: Jak przebiegła ta rozmowa?
+    buttons:
+    - title: 👍
+      payload: '/feedback{"feedback_value": "positive"}'
+    - title: 👎
+      payload: '/feedback{"feedback_value": "negative"}'
+    - title: Nie chę podawać
+      payload: '/feedback{"feedback_value": "not_provided"}'
+
+  utter_ask_give_feedback_message:
+  - text: Czy chciałbyś jeszcze coś dodać, zostawić nam swoje sugestie co i jak mogę zrobić lepiej?
+    quick_replies:
+    - title: Tak, chętnie!
+      payload: /affirm
+    - title: Innym razem
+      payload: /deny
+
+  utter_ask_feedback_message:
+  - text: Super, napisz mi o tym!
+
+  utter_thanks_for_feedback:
+  - text: Dziękuję za informację zwrotną, wykorzystam ją, aby Finderstand spełniał jeszcze bardziej Twoje potrzeby i oczekwiania!
+
+# proprietary templates
+

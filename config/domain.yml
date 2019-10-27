@@ -197,7 +197,7 @@ templates:                                                                      
 
 # buy products form - submit
   utter_summarize_form:
-  - text: "Ok, czas na podsumowanie! \n\n Na {meat_amount} kg, musisz kupić: \n
+  - text: "Ok, czas na podsumowanie! \n\n Na {meat_amount} kg mięsa, musisz kupić: \n
           - {liver_amount} kg wątroby, \n
           - {offal_amount} kg podrobów, \n
           - {bones_amount} kg kości."

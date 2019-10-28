@@ -12,8 +12,6 @@ pipeline:  # based on supervised_embeddings pipeline
 - name: EntitySynonymMapper
 
 - name: CountVectorsFeaturizer
-
-- name: CountVectorsFeaturizer
   analyzer: char_wb
   min_ngram: 1
   max_ngram: 4

@@ -231,7 +231,7 @@ models/*
 !models/model_prod.tar.gz
 
 # barf-o-bot logs
-logs/*
+logs/*.txt
 
 # barf-o-bot db's
-db/*
+db/*.db

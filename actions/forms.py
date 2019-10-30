@@ -25,7 +25,7 @@ class CalculateProductsToBuyForm(FormAction):
                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
             meat_amount = int(value)
-            if meat_amount < 1:  # only over than 1 kg of meat is supported
+            if not 1 < meat_amount < 100:
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_meat_amount', tracker)

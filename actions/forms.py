@@ -48,6 +48,50 @@ class CalculateProductsToBuyForm(FormAction):
         return []
 
 
+class CalculatePortionsDistribution(FormAction):
+
+    def name(self) -> Text:
+        return 'form_calculate_portions_distribution'
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ['daily_portion', 'weekly_cycle']
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {'daily_portion': [self.from_entity(entity='number')],
+                'weekly_cycle': [self.from_entity(entity='number')]}
+
+    def validate_daily_portion(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker,
+                             domain: Dict[Text, Any]) -> Dict[Text, Any]:
+        try:
+            daily_portion = int(value)
+            if not 1 < daily_portion < 3000:
+                raise ValueError
+        except (ValueError, TypeError):
+            dispatcher.utter_template('utter_wrong_daily_portion', tracker)
+            return {'daily_portion': None}
+        return {'daily_portion': str(value)}
+
+    def validate_weekly_cycle(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker,
+                             domain: Dict[Text, Any]) -> Dict[Text, Any]:
+        try:
+            weekly_cycle = int(value)
+            if not 1 < weekly_cycle < 10:
+                raise ValueError
+        except (ValueError, TypeError):
+            dispatcher.utter_template('utter_wrong_weekly_cycle', tracker)
+            return {'weekly_cycle': None}
+        return {'weekly_cycle': str(value)}
+
+    def round_number(self, number: Decimal, decimal_places: int):
+        decimal_value = Decimal(number)
+        return decimal_value.quantize(Decimal(10) ** -decimal_places)
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
+        dispatcher.utter_template('utter_')
+        return []
+
+
 class FeedbackForm(FormAction):
     """Form that handles collecting feedback"""
 

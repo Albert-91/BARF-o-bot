@@ -1,7 +1,12 @@
 # BARF-o-bot
 
-This repo contains the BARF-o-bot sources based on Rasa framework.
+This repo contains the BARF-o-bot sources based on Rasa framework. BARF-o-bot is a specialist in BARF dogs diet based on raw meat. Currently his abilities are:
+*  calculating of products to buy, where input of this calculation is amount of meat
+*  smalltalk
 
+Chatbot's training data and responses are only in polish language.
+
+If you want to try it then go to [Messenger](https://www.messenger.com/t/105119554259120).
 
 ## Procedures
 

@@ -38,10 +38,14 @@ To deploy:
   * Custom action service
   * Duckling service
 
-as a one stack called "barfobot" run command:
-```bash
-docker stack deploy -c docker-compose-prod.yml barfobot
-```
+1. Override rasa-sdk image by command:
+   ```bash
+   docker build -t barfobot_actions:latest .
+   ```
+1. Run stack called "barfobot":
+   ```bash
+   docker stack deploy -c docker-compose-prod.yml barfobot
+   ```
 On screen should appear a message that three services was created.
 
 ## Deploy new version (update a chatbot with trained model via Docker on production)

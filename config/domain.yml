@@ -193,7 +193,7 @@ templates:                                                                      
           Podana wartość musi być większa od zera.
 
   utter_wrong_meat_amount:
-    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera!
+    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze od 100 kg!
 
 # buy products form - submit
   utter_summarize_form:

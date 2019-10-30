@@ -7,13 +7,13 @@ class ProductsRatio(Enum):
     LIVER = 0.07
     OFFAL = 0.2
     BONES = 0.3
+    MEAT = 1 - LIVER.value - OFFAL.value - BONES.value
 
 
 def calculate_products_to_buy(meat_amount: Decimal) -> Dict[Text, Decimal]:
-    MEAT_RATIO = Decimal(1 - ProductsRatio.BONES.value - ProductsRatio.OFFAL.value - ProductsRatio.LIVER.value)
-    liver_to_buy = meat_amount * Decimal(ProductsRatio.LIVER.value) / MEAT_RATIO
-    offal_to_buy = meat_amount * Decimal(ProductsRatio.OFFAL.value) / MEAT_RATIO
-    bones_to_buy = meat_amount * Decimal(ProductsRatio.BONES.value) / MEAT_RATIO
+    liver_to_buy = meat_amount * Decimal(ProductsRatio.LIVER.value) / ProductsRatio.MEAT.value
+    offal_to_buy = meat_amount * Decimal(ProductsRatio.OFFAL.value) / ProductsRatio.MEAT.value
+    bones_to_buy = meat_amount * Decimal(ProductsRatio.BONES.value) / ProductsRatio.MEAT.value
     return {
         "liver": liver_to_buy,
         "offal": offal_to_buy,

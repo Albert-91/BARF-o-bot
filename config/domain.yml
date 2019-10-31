@@ -147,6 +147,7 @@ forms:                                                                          
 # ---------------------------------------------------------------------------------------------------------------------#
 
 - form_calculate_products_to_buy
+- form_calculate_ingredients_distribution
 - form_feedback
 
 # ---------------------------------------------------------------------------------------------------------------------#
@@ -177,10 +178,10 @@ templates:                                                                      
 
 # buy products form
   utter_buy_products_intro:
-  - text: A więc zamierzasz zrobić BARFowe zakupy dla swojego psiaka...
+  - text: A więc zamierzasz zrobić BARF-owe zakupy dla swojego psiaka...
 
   utter_ask_stop_buy_products:
-  - text: Czy chcesz zakończyć obliczanie BARFowych zakupów?
+  - text: Czy chcesz zakończyć obliczanie BARF-owych zakupów?
 
   utter_continue_buy_products:
   - text: W takim razie kontynuujmy.
@@ -195,11 +196,54 @@ templates:                                                                      
           Podana wartość musi być większa od zera.
 
   utter_wrong_meat_amount:
-    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze od 100 kg!
+    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze bądź równe 100 kg!
 
 ## buy products form - submit
-  utter_summarize_form:
+  utter_summarize_products_to_buy_form:
   - text: "Ok, czas na podsumowanie! \n\n Na {meat_amount} kg mięsa, musisz kupić: \n
+          - {liver_amount} kg wątroby, \n
+          - {offal_amount} kg podrobów, \n
+          - {bones_amount} kg kości."
+
+# ingredients distribution form
+  utter_ingredients_distribution_intro:
+  - text: A więc zamierzasz zrobić BARF-owe zakupy dla swojego psiaka...
+
+  utter_ask_stop_ingredients_distribution:
+    - text: Czy chcesz zakończyć obliczanie wielkości BARF-owych składników?
+
+  utter_continue_ingredients_distribution:
+  - text: W takim razie kontynuujmy.
+
+## ingredients distribution form - slots
+
+  ### daily portion slot
+  utter_ask_daily_portion:
+  - text: Jaka jest waga dziennej porcji Twojego psa? Wartość podaj w gramach.
+
+  utter_explain_daily_portion:
+  - text: >
+          Podaj ile gramów dziennie jedzenia zjada Twój pies. \n\n
+          Podana wartość musi być większa od zera.
+
+  utter_wrong_daily_portion:
+    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze bądź równe 3000 gramów!
+
+  ### weekly cycle slot
+  utter_ask_weekly_cycle:
+  - text: Ilu tygodniowy chcesz zrobić cykl jedzenia?
+
+  utter_explain_weekly_cycle:
+  - text: >
+          Podaj z ilu tygodni chcesz wymieszać mięso, podroby, wątrobę i kości by następnie je popakować.
+
+  utter_wrong_weekly_cycle:
+    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze bądź równe 4 tygodni!
+
+## buy products form - submit
+  utter_summarize_ingredients_distribution_form:
+  - text: "Czas na podsumowanie! \n\n Na {weekly_cycle} tygodnie, dzieląc porcje po {daily_portion} g, musisz przygotować: \n
+          - {meat_amount} kg mięsa, \n
           - {liver_amount} kg wątroby, \n
           - {offal_amount} kg podrobów, \n
           - {bones_amount} kg kości."
@@ -231,7 +275,7 @@ templates:                                                                      
 
 # proprietary templates
   utter_menu:
-  - text: Cześć {user_name}, mam na imię BARF-o-bot. Jestem chatbotem, który wprowadzi Ciebie i Twojego psa w świat BARFa, a także pomoże Ci w przygotowaniu porcji dla Twojego pupila ;)
+  - text: Cześć {user_name}, mam na imię BARF-o-bot. Jestem chatbotem, który wprowadzi Ciebie i Twojego psa w świat BARF-a, a także pomoże Ci w przygotowaniu porcji dla Twojego pupila ;)
     quick_replies:
     - title: Chcę zrobić zakupy!
       payload: /buy_products

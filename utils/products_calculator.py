@@ -26,7 +26,7 @@ def calculate_products_to_buy(meat_amount: Decimal) -> Dict[Text, Decimal]:
     }
 
 
-def calculate_portions_distribution(weekly_cycle: Decimal, daily_portion: Decimal) -> Dict[Text, Decimal]:
+def calculate_ingredients_distribution(weekly_cycle: Decimal, daily_portion: Decimal) -> Dict[Text, Decimal]:
     """
     Function gets number of cycles and amount of daily portion and returns a dict with total weight of each product
     in cycle.

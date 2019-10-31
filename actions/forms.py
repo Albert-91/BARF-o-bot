@@ -7,6 +7,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
 from utils.products_calculator import calculate_products_to_buy
+from .settings import *
 
 
 class CalculateProductsToBuyForm(FormAction):
@@ -25,7 +26,7 @@ class CalculateProductsToBuyForm(FormAction):
                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
             meat_amount = int(value)
-            if not 1 < meat_amount < 100:
+            if not 1 < meat_amount < MEAT_AMOUNT_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_meat_amount', tracker)
@@ -65,7 +66,7 @@ class CalculatePortionsDistribution(FormAction):
                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
             daily_portion = int(value)
-            if not 1 < daily_portion < 3000:
+            if not 1 < daily_portion < DAILY_PORTION_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_daily_portion', tracker)
@@ -76,7 +77,7 @@ class CalculatePortionsDistribution(FormAction):
                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
             weekly_cycle = int(value)
-            if not 1 < weekly_cycle < 10:
+            if not 1 < weekly_cycle < WEEKLY_CYCLE_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_weekly_cycle', tracker)

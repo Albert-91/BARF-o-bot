@@ -41,7 +41,7 @@ class CalculateProductsToBuyForm(FormAction):
         meat_amount = Decimal(tracker.get_slot('meat_amount'))
         dispatcher.utter_template('utter_loan_summarize', tracker)
         products_amounts = calculate_products_to_buy(meat_amount)
-        dispatcher.utter_template('utter_summarize_form', tracker,
+        dispatcher.utter_template('utter_summarize_products_to_buy_form', tracker,
                                   meat_amount=int(meat_amount),
                                   liver_amount=float(self.round_number(products_amounts['liver'], 2)),
                                   offal_amount=float(self.round_number(products_amounts['offal'], 2)),
@@ -49,10 +49,10 @@ class CalculateProductsToBuyForm(FormAction):
         return []
 
 
-class CalculatePortionsDistribution(FormAction):
+class CalculateIngredientsDistribution(FormAction):
 
     def name(self) -> Text:
-        return 'form_calculate_portions_distribution'
+        return 'form_calculate_ingredients_distribution'
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
@@ -89,7 +89,7 @@ class CalculatePortionsDistribution(FormAction):
         return decimal_value.quantize(Decimal(10) ** -decimal_places)
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        dispatcher.utter_template('utter_')
+        dispatcher.utter_template('utter_summarize_ingredients_distribution_form')
         return []
 
 

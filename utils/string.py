@@ -1,4 +1,5 @@
 import re
+from decimal import Decimal
 from typing import Text
 
 
@@ -11,3 +12,10 @@ def add_new_lines_to_text(string: Text) -> Text:
     s = re.sub(r"\\n ", "\n", string)
     s = re.sub(r"\\n", "\n", s)
     return s
+
+
+def get_correct_week_word(quantity: Decimal) -> Text:
+    if quantity == Decimal(1):
+        return "tydzień"
+    else:
+        return "tygodnie"

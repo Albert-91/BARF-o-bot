@@ -6,7 +6,8 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
-from utils.products_calculator import calculate_products_to_buy
+from utils.products_calculator import calculate_products_to_buy, calculate_ingredients_distribution
+from utils.string import get_correct_week_word
 from .settings import *
 
 
@@ -89,7 +90,18 @@ class CalculateIngredientsDistribution(FormAction):
         return decimal_value.quantize(Decimal(10) ** -decimal_places)
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        dispatcher.utter_template('utter_summarize_ingredients_distribution_form')
+        weekly_cycle = Decimal(tracker.get_slot('weekly_cycle'))
+        daily_portion = Decimal(tracker.get_slot('daily_portion'))
+        week = get_correct_week_word(weekly_cycle)
+        ingredients = calculate_ingredients_distribution(weekly_cycle, daily_portion)
+        dispatcher.utter_template('utter_summarize_ingredients_distribution_form', tracker,
+                                  weekly_cycle=weekly_cycle,
+                                  daily_portion=daily_portion,
+                                  week=week,
+                                  meat_amount=ingredients['meat'],
+                                  liver_amount=ingredients['liver'],
+                                  offal_amount=ingredients['offal'],
+                                  bones_amount=ingredients['bones'])
         return []
 
 

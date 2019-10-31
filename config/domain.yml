@@ -242,7 +242,7 @@ templates:                                                                      
 
 ## buy products form - submit
   utter_summarize_ingredients_distribution_form:
-  - text: "Czas na podsumowanie! \n\n Na {weekly_cycle} tygodnie, dzieląc porcje po {daily_portion} g, musisz przygotować: \n
+  - text: "Czas na podsumowanie! \n\n Na {weekly_cycle} {week}, dzieląc porcje po {daily_portion} g, musisz przygotować: \n
           - {meat_amount} kg mięsa, \n
           - {liver_amount} kg wątroby, \n
           - {offal_amount} kg podrobów, \n

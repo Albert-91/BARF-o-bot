@@ -31,10 +31,12 @@ intents:                                                                        
 - feedback
 - entered_data
 - buy_products
+- ingredient_distribution
 
 # special intents for triggering some scenario cases by intents injection into tracker
 
 - start_buy_products
+- start_ingredient_distribution
 
 # ---------------------------------------------------------------------------------------------------------------------#
 slots:                                                                                                           # slots
@@ -88,6 +90,12 @@ slots:                                                                          
   meat_amount:
     type: unfeaturized
 
+  daily_portion:
+    type: unfeaturized
+
+  weekly_cycle:
+    type: unfeaturized
+
 # slot used by custom fallback action
   out_of_scope_detected:
     type: bool
@@ -129,6 +137,7 @@ actions:                                                                        
 - utter_anything_else
 - utter_buy_products_intro
 - utter_continue_buy_products
+- utter_ingredients_distribution_intro
 
 - action_set_out_of_scope_detected
 - action_set_out_of_scope_not_detected
@@ -136,6 +145,7 @@ actions:                                                                        
 
 # inject intent actions
 - action_inject_intent_start_buy_products
+- action_inject_intent_start_ingredient_distribution
 
 # test actions (ready to use actions for developers to quickly test sth etc).
 # (feel free to change its body if needed during your development)
@@ -207,7 +217,7 @@ templates:                                                                      
 
 # ingredients distribution form
   utter_ingredients_distribution_intro:
-  - text: A więc zamierzasz zrobić BARF-owe zakupy dla swojego psiaka...
+  - text: A więc nadszedł czas na dzielenie mięsa ...
 
   utter_ask_stop_ingredients_distribution:
     - text: Czy chcesz zakończyć obliczanie wielkości BARF-owych składników?
@@ -279,9 +289,11 @@ templates:                                                                      
     quick_replies:
     - title: Chcę zrobić zakupy!
       payload: /buy_products
-    - title: Mam pytanie o BARF
-      # temporary it's buy_products intent
-      payload: /buy_products
+    - title: Proporcje składników
+      payload: /ingredient_distribution
+#    - title: Mam pytanie o BARF
+#      # temporary it's buy_products intent
+#      payload: /buy_products
 
   utter_anything_else:
   - text: Co chciałbyś teraz zrobić?

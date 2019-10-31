@@ -153,10 +153,12 @@ forms:                                                                          
 templates:                                                                                                   # templates
 # ---------------------------------------------------------------------------------------------------------------------#
 
-## templates related with default actions
+# templates related with default actions
   utter_default:
-  # Temporary text for testing purposes
-  - text: --- DEFAULT FALLBACK ---
+  - text: Przepraszam, nie zrozumiałem 🤷🏻‍. Czy mógłbyś to inaczej sformułować?
+  - text: Nie zrozumiałem, czy możesz ująć to w inny sposób?
+  - text: Przepraszam, ale nie zrozumiałem cię. Czy możesz inaczej sformułować swoją wypowiedź?
+  - text: Obawiam się, że nie do końca zrozumiałem to co właśnie powiedziałeś.Czy mógłbyś ująć to inaczej?
 
   utter_default_ask_affirmation_headline:
   - text: Chyba nie zrozumiałem 🤔 Czy Twoją intencją było...
@@ -183,7 +185,7 @@ templates:                                                                      
   utter_continue_buy_products:
   - text: W takim razie kontynuujmy.
 
-# buy products form - slots
+## buy products form - slots
   utter_ask_meat_amount:
   - text: Na ile kilogramów mięsa chcesz zrobić zakupy?
 
@@ -195,14 +197,14 @@ templates:                                                                      
   utter_wrong_meat_amount:
     - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze od 100 kg!
 
-# buy products form - submit
+## buy products form - submit
   utter_summarize_form:
   - text: "Ok, czas na podsumowanie! \n\n Na {meat_amount} kg mięsa, musisz kupić: \n
           - {liver_amount} kg wątroby, \n
           - {offal_amount} kg podrobów, \n
           - {bones_amount} kg kości."
 
-## templates related to feedback
+# templates related to feedback
   utter_ask_feedback_value:
   - text: Jak przebiegła ta rozmowa?
     quick_replies:

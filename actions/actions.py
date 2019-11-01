@@ -107,6 +107,15 @@ class InjectIntentStartBuyProductsFormAction(CommonActionMixin, Action):
         return self.inject_intent('start_buy_products')
 
 
+class InjectIntentStartIngredientDistributionFormAction(CommonActionMixin, Action):
+    """Injects intent `start_ingredient_distribution` to the tracker so stories may handle it accordingly to scenarion neeeds"""
+    def name(self) -> Text:
+        return 'action_inject_intent_start_ingredient_distribution'
+
+    def run(self, dispatcher, tracker, domain):
+        return self.inject_intent('start_ingredient_distribution')
+
+
 class UtterWrongRequestedSlotValueAction(Action):
     """Utters user with appropriate "wrong" utterance (that informs what values are valid/is expected) related to
        current requested slot. I.e. if current requested slot is `vehicle_age` it displays utterance

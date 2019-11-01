@@ -1,12 +1,11 @@
-## solving problems presentation
-## *scenario*: user chose solve problems showcase
+## buy products button
+## *scenario*: user chose buy products
 * buy_products
   - utter_buy_products_intro
   - action_inject_intent_start_buy_products
 
-## car loan form processing - happy path
-## *scenario*: form starts then user follows all parameters gathering as expected then feedback, then go back 
-##             to showcase menu
+## buy products form processing - happy path
+## *scenario*: form starts then user follows all parameters gathering as expected then feedback, then asks anything else
 * start_buy_products  
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
@@ -17,9 +16,9 @@
   - form{"name": null}
   - action_anything_else
 
-## car loan form processing - finish after interruption
+## buy products form processing - finish after interruption
 ## *scenario*: form restarts after some intents occurred & processed during params gathering but then 
-##             user follows rest parameters gathering as expected then feedback, then go back to showcase menu
+##             user follows rest parameters gathering as expected then feedback, then asks anything else
   - action_inject_intent_start_buy_products  
 * start_buy_products
   - action_reset_requested_slot 
@@ -32,7 +31,7 @@
   - form{"name": null}
   - action_anything_else
 
-## car loan form processing - 1st params gathering interruption by chitchat
+## buy products form processing - 1st params gathering interruption by chitchat
 ## *scenario*: form starts then params gathering is interrupted by chitchat then bot responds chitchat and restart form
 * start_buy_products
   - form_calculate_products_to_buy
@@ -47,7 +46,7 @@
   - respond_chitchat    
   - action_inject_intent_start_buy_products  
 
-## car loan form processing - 2nd and following params gathering interruption by chitchat
+## buy products form processing - 2nd and following params gathering interruption by chitchat
 ## *scenario*: form restarts then params gathering is interrupted by chitchat then bot responds chitchat and restart form
   - action_inject_intent_start_buy_products  
 * start_buy_products
@@ -64,7 +63,7 @@
   - respond_chitchat    
   - action_inject_intent_start_buy_products  
 
-## car loan form processing - 1st params gathering interruption by explain
+## buy products form processing - 1st params gathering interruption by explain
 ## *scenario*: form starts then params gathering is interrupted by explain then bot utters wrong param 
 ##             value and restart form
 * start_buy_products  
@@ -80,7 +79,7 @@
   - action_utter_explain_requested_slot_value
   - action_inject_intent_start_buy_products
 
-## car loan form processing - 2nd and following params gathering interruption by explain
+## buy products form processing - 2nd and following params gathering interruption by explain
 ## *scenario*: form restarts then params gathering is interrupted by explain then bot utters wrong param 
 ##             value and restart form
   - action_inject_intent_start_buy_products
@@ -98,7 +97,7 @@
   - action_utter_explain_requested_slot_value
   - action_inject_intent_start_buy_products    
   
-## car loan form processing - 1st params gathering interruption by stop then deny
+## buy products form processing - 1st params gathering interruption by stop then deny
 ## *scenario*: form starts then params gathering is interrupted by stop then bot ask to stop showcase then user 
 ##             deny and bot continue showcase
 * start_buy_products  
@@ -116,7 +115,7 @@
   - utter_continue_buy_products
   - action_inject_intent_start_buy_products    
 
-## car loan form processing - 2nd and following params gathering interruption by stop then deny
+## buy products form processing - 2nd and following params gathering interruption by stop then deny
 ## *scenario*: form restarts then params gathering is interrupted by stop then bot ask to stop showcase then user 
 ##             deny and bot continue showcase
   - action_inject_intent_start_buy_products
@@ -136,9 +135,9 @@
   - utter_continue_buy_products
   - action_inject_intent_start_buy_products   
 
-## car loan form processing - 1st params gathering interruption by stop then affirm
+## buy products form processing - 1st params gathering interruption by stop then affirm
 ## *scenario*: form starts then params gathering is interrupted by stop then bot ask to stop showcase then user 
-##             affirm then feedback then go back to showcase menu
+##             affirm then feedback then asks anything else
 * start_buy_products  
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
@@ -159,9 +158,9 @@
   - form{"name": "null"}
   - action_anything_else
 
-## car loan form processing - 2nd and following params gathering interruption by stop then affirm
+## buy products form processing - 2nd and following params gathering interruption by stop then affirm
 ## *scenario*: form restarts then params gathering is interrupted by stop then bot ask to stop showcase then user 
-##             affirm then feedback then go back to showcase menu
+##             affirm then feedback then asks anything else
   - action_inject_intent_start_buy_products
 * start_buy_products
   - action_reset_requested_slot
@@ -184,7 +183,7 @@
   - form{"name": "null"}
   - action_anything_else  
 
-## car loan form processing - 1st params gathering interruption by other (not supported in scenario) intent
+## buy products form processing - 1st params gathering interruption by other (not supported in scenario) intent
 ## *scenario*: form starts then params gathering is interrupted by not supported intent then bot utters wrong param
 ##             value and restart form
 * start_buy_products  
@@ -200,7 +199,7 @@
   - action_utter_wrong_requested_slot_value
   - action_inject_intent_start_buy_products
 
-## car loan form processing - 2nd and following params gathering interruption by other (not supported in scenario) intent
+## buy products form processing - 2nd and following params gathering interruption by other (not supported in scenario) intent
 ## *scenario*: form restarts then params gathering is interrupted by not supported intent then bot utters wrong param
 ##             value and restart form
   - action_inject_intent_start_buy_products  
@@ -218,7 +217,7 @@
   - action_utter_wrong_requested_slot_value
   - action_inject_intent_start_buy_products
 
-## car loan form processing - 1st params gathering interruption by generic "out of scope"
+## buy products form processing - 1st params gathering interruption by generic "out of scope"
 ## *scenario*: form starts then params gathering is interrupted generic "out of scope" then bot utters wrong param
 ##             value and restart form
 * start_buy_products  
@@ -234,7 +233,7 @@
   - action_utter_wrong_requested_slot_value
   - action_inject_intent_start_buy_products
 
-## car loan form processing - 2nd and following params gathering interruption by generic "out of scope"
+## buy products form processing - 2nd and following params gathering interruption by generic "out of scope"
 ## *scenario*: form restarts then params gathering is interrupted generic "out of scope" then bot utters wrong param
 ##             value and restart form
   - action_inject_intent_start_buy_products  

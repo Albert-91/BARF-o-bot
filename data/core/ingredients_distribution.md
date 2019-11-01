@@ -111,9 +111,9 @@
 * stop
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
-  - utter_ask_stop_buy_products
+  - utter_ask_stop_ingredients_distribution
 * deny
-  - utter_continue_buy_products
+  - utter_continue_ingredients_distribution
   - action_inject_intent_start_ingredient_distribution    
 
 ## car loan form processing - 2nd and following params gathering interruption by stop then deny
@@ -131,9 +131,9 @@
 * stop
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
-  - utter_ask_stop_buy_products
+  - utter_ask_stop_ingredients_distribution
 * deny
-  - utter_continue_buy_products
+  - utter_continue_ingredients_distribution
   - action_inject_intent_start_ingredient_distribution   
 
 ## car loan form processing - 1st params gathering interruption by stop then affirm
@@ -149,7 +149,7 @@
 * stop
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
-  - utter_ask_stop_buy_products
+  - utter_ask_stop_ingredients_distribution
 * affirm
   - action_deactivate_form
   - form{"name": null}
@@ -174,7 +174,7 @@
 * stop
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
-  - utter_ask_stop_buy_products
+  - utter_ask_stop_ingredients_distribution
 * affirm
   - action_deactivate_form
   - form{"name": null}

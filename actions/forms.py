@@ -32,7 +32,6 @@ class CalculateProductsToBuyForm(FormAction):
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_meat_amount', tracker)
-            dispatcher.utter_message(str(value))
             return {'meat_amount': None}
         return {'meat_amount': str(value[0])}
 

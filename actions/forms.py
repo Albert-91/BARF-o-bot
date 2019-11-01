@@ -21,18 +21,20 @@ class CalculateProductsToBuyForm(FormAction):
         return ['meat_amount']
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-        return {'meat_amount': [self.from_entity(entity='number')]}
+        return {'meat_amount': [self.from_entity(entity='number', intent='enter_meat_amount'),
+                                self.from_entity(entity='number')]}
 
     def validate_meat_amount(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker,
                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
-            meat_amount = int(value)
-            if not 1 < meat_amount < MEAT_AMOUNT_UPPER_LIMIT:
+            meat_amount = int(value[0])
+            if not 1 < meat_amount <= MEAT_AMOUNT_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_meat_amount', tracker)
+            dispatcher.utter_message(str(value))
             return {'meat_amount': None}
-        return {'meat_amount': str(value)}
+        return {'meat_amount': str(value[0])}
 
     def round_number(self, number: Decimal, decimal_places: int):
         decimal_value = Decimal(number)
@@ -60,30 +62,32 @@ class CalculateIngredientsDistribution(FormAction):
         return ['daily_portion', 'weekly_cycle']
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-        return {'daily_portion': [self.from_entity(entity='number')],
-                'weekly_cycle': [self.from_entity(entity='number')]}
+        return {'daily_portion': [self.from_entity(entity='number'),
+                                  self.from_entity(entity='number', intent='enter_daily_portion')],
+                'weekly_cycle': [self.from_entity(entity='number'),
+                                 self.from_entity(entity='number', intent='enter_weekly_cycle')]}
 
     def validate_daily_portion(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker,
                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
-            daily_portion = int(value)
-            if not 1 < daily_portion < DAILY_PORTION_UPPER_LIMIT:
+            daily_portion = int(value[0])
+            if not 1 < daily_portion <= DAILY_PORTION_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_daily_portion', tracker)
             return {'daily_portion': None}
-        return {'daily_portion': str(value)}
+        return {'daily_portion': str(value[0])}
 
     def validate_weekly_cycle(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker,
                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
-            weekly_cycle = int(value)
-            if not 1 < weekly_cycle < WEEKLY_CYCLE_UPPER_LIMIT:
+            weekly_cycle = int(value[0])
+            if not 1 < weekly_cycle <= WEEKLY_CYCLE_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
             dispatcher.utter_template('utter_wrong_weekly_cycle', tracker)
             return {'weekly_cycle': None}
-        return {'weekly_cycle': str(value)}
+        return {'weekly_cycle': str(value[0])}
 
     def round_number(self, number: Decimal, decimal_places: int):
         decimal_value = Decimal(number)

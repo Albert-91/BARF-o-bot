@@ -32,6 +32,9 @@ intents:                                                                        
 - entered_data
 - buy_products
 - ingredient_distribution
+- enter_meat_amount
+- enter_weekly_cycle
+- enter_daily_portion
 
 # special intents for triggering some scenario cases by intents injection into tracker
 
@@ -138,6 +141,8 @@ actions:                                                                        
 - utter_buy_products_intro
 - utter_continue_buy_products
 - utter_ingredients_distribution_intro
+- utter_ask_stop_ingredients_distribution
+- utter_continue_ingredients_distribution
 
 - action_set_out_of_scope_detected
 - action_set_out_of_scope_not_detected

@@ -17,13 +17,13 @@ pipeline:  # based on supervised_embeddings pipeline
   max_ngram: 4
 
 - name: EmbeddingIntentClassifier
-  epochs: 50
+  epochs: 300
   random_seed: 236971045
 
 # additional pipeline items (not a part of default supervised_embeddings pipeline)
 
 - name: ResponseSelector
-  epochs: 50
+  epochs: 300
   random_seed: 196725830
 
 - name: DucklingHTTPExtractor

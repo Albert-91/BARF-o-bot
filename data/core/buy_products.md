@@ -2,6 +2,7 @@
 ## *scenario*: user chose buy products
 * buy_products
   - utter_buy_products_intro
+  - action_reset_form_slots
   - action_inject_intent_start_buy_products
 
 ## buy products form processing - happy path
@@ -10,11 +11,12 @@
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
   - form{"name": "null"}
+  - action_reset_form_slots
   <!-- collect feedback -->    
   - form_feedback
   - form{"name": "form_feedback"}
   - form{"name": null}
-  - action_anything_else
+  - utter_anything_else
 
 ## buy products form processing - finish after interruption
 ## *scenario*: form restarts after some intents occurred & processed during params gathering but then 
@@ -25,11 +27,12 @@
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
   - form{"name": "null"}
+  - action_reset_form_slots
   <!-- collect feedback -->    
   - form_feedback
   - form{"name": "form_feedback"}
   - form{"name": null}
-  - action_anything_else
+  - utter_anything_else
 
 ## buy products form processing - 1st params gathering interruption by chitchat
 ## *scenario*: form starts then params gathering is interrupted by chitchat then bot responds chitchat and restart form
@@ -152,11 +155,12 @@
 * affirm
   - action_deactivate_form
   - form{"name": null}
+  - action_reset_form_slots
   <!-- collect feedback -->    
   - form_feedback
   - form{"name": "form_feedback"}
   - form{"name": "null"}
-  - action_anything_else
+  - utter_anything_else
 
 ## buy products form processing - 2nd and following params gathering interruption by stop then affirm
 ## *scenario*: form restarts then params gathering is interrupted by stop then bot ask to stop showcase then user 
@@ -177,11 +181,12 @@
 * affirm
   - action_deactivate_form
   - form{"name": null}
+  - action_reset_form_slots
   <!-- collect feedback -->    
   - form_feedback
   - form{"name": "form_feedback"}
   - form{"name": "null"}
-  - action_anything_else  
+  - utter_anything_else  
 
 ## buy products form processing - 1st params gathering interruption by other (not supported in scenario) intent
 ## *scenario*: form starts then params gathering is interrupted by not supported intent then bot utters wrong param

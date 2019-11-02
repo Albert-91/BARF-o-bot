@@ -106,11 +106,11 @@
 * start_buy_products  
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products
@@ -126,11 +126,11 @@
   - action_reset_requested_slot   
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products
@@ -144,11 +144,11 @@
 * start_buy_products  
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products
@@ -170,11 +170,11 @@
   - action_reset_requested_slot
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products
@@ -194,11 +194,11 @@
 * start_buy_products  
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* affirm OR deny OR menu OR out_of_scope
+* affirm OR deny OR out_of_scope
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* affirm OR deny OR menu OR out_of_scope
+* affirm OR deny OR out_of_scope
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}  
   - action_utter_wrong_requested_slot_value
@@ -212,11 +212,11 @@
   - action_reset_requested_slot
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* affirm OR deny OR menu OR out_of_scope
+* affirm OR deny OR out_of_scope
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* affirm OR deny OR menu OR out_of_scope
+* affirm OR deny OR out_of_scope
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}  
   - action_utter_wrong_requested_slot_value

@@ -128,7 +128,7 @@ actions:                                                                        
 - action_utter_wrong_requested_slot_value
 - action_utter_explain_requested_slot_value
 - action_reset_requested_slot
-- action_anything_else
+- action_reset_form_slots
 
 ## respond actions
 - respond_chitchat

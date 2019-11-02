@@ -86,16 +86,16 @@ class GetFacebookUserProfileDataAction(Action):
         return []
 
 
-class AnythingElseAction(Action):
-    """Initiates a showcase mode"""
+class ResetFormSlotsAction(Action):
 
     def name(self):
-        return 'action_anything_else'
+        return 'action_reset_form_slots'
 
     def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_template('utter_anything_else', tracker)
         # resets slots used for showcase scenarios to ensure start it fresh again
-        return [SlotSet('meat_amount', None)]
+        return [SlotSet('meat_amount', None),
+                SlotSet('daily_portion', None),
+                SlotSet('weekly_cycle', None)]
 
 
 class InjectIntentStartBuyProductsFormAction(CommonActionMixin, Action):

@@ -108,6 +108,24 @@ class CalculateIngredientsDistribution(FormAction):
         return []
 
 
+class WeatherForm(FormAction):
+
+    def name(self) -> Text:
+        return 'form_weather'
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ['location']
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {'location': [self.from_entity(entity='location', intent='enter_location'),
+                             self.from_entity(entity='location', intent='weather')]}
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
+
+        return []
+
+
 class FeedbackForm(FormAction):
     """Form that handles collecting feedback"""
 

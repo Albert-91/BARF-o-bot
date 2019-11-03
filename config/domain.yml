@@ -16,6 +16,7 @@ entities:                                                                       
 
 # project entities
 - feedback_value
+- location
 
 # ---------------------------------------------------------------------------------------------------------------------#
 intents:                                                                                                       # intents
@@ -29,15 +30,17 @@ intents:                                                                        
 - explain
 - showcase_car_loan
 - feedback
-- entered_data
 - buy_products
 - ingredient_distribution
+- weather
+
+# intents to enter data during forms
 - enter_meat_amount
 - enter_weekly_cycle
 - enter_daily_portion
+- enter_location
 
 # special intents for triggering some scenario cases by intents injection into tracker
-
 - start_buy_products
 - start_ingredient_distribution
 
@@ -97,6 +100,9 @@ slots:                                                                          
     type: unfeaturized
 
   weekly_cycle:
+    type: unfeaturized
+
+  location:
     type: unfeaturized
 
 # slot used by custom fallback action
@@ -163,6 +169,7 @@ forms:                                                                          
 
 - form_calculate_products_to_buy
 - form_calculate_ingredients_distribution
+- form_weather
 - form_feedback
 
 # ---------------------------------------------------------------------------------------------------------------------#

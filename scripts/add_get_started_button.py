@@ -1,3 +1,4 @@
+import sys
 from typing import Text
 
 import yaml
@@ -35,12 +36,10 @@ def get_token_from_credentials(credential_file_path: Text) -> Text:
 
 
 if __name__ == '__main__':
-    add_get_started_button("menu")
-    # if len(sys.argv) == 4:
-    #     DB_NAME = sys.argv[1]
-    #     START_DATE = sys.argv[2]
-    #     END_DATE = sys.argv[3]
-    #     main(DB_NAME, START_DATE, END_DATE)
-    # else:
-    #     print("Usage: python3 analytics.py data_base_name.db start_date end_date")
-    #     print("Example: python3 analytics.py wyrocznia_store.db 01.07.2019 30.07.2019")
+    if len(sys.argv) == 3:
+        intent = sys.argv[1]
+        credential_file = sys.argv[2]
+        add_get_started_button(intent, credential_file)
+    else:
+        print("Usage: python3 add_get_started_button.py intent_name credentials_file_path")
+        print("Example: python3 add_get_started_button.py menu ../config/dev.credentials.yml")

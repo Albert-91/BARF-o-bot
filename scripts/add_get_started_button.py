@@ -1,9 +1,10 @@
+import json
 import sys
 from typing import Text
 
-import yaml
-import json
 import requests
+
+from scripts.data_readers import get_facebook_token_from_credentials
 
 
 def add_get_started_button(intent_name: Text, credential_file_path: Text):
@@ -12,24 +13,14 @@ def add_get_started_button(intent_name: Text, credential_file_path: Text):
     :param credential_file_path: Rasa file with Facebook credentials
     :param intent_name: intent which will be triggered after clicking "get_started" button
     """
-    page_access_token = get_token_from_credentials(credential_file_path)
+    page_access_token = get_facebook_token_from_credentials(credential_file_path)
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token="
     headers = {"Content-Type": "application/json"}
     data = {"get_started": {"payload": "/" + intent_name}}
     data = json.dumps(data)
     r = requests.post(url=url+page_access_token, data=data, headers=headers)
     if r.json()['result'] == 'success':
-        print("Added get_started button with '{}' intent.".format(intent_name))
-
-
-def get_token_from_credentials(credential_file_path: Text) -> Text:
-    with open(credential_file_path, 'r') as stream:
-        try:
-            data = yaml.safe_load(stream)
-            page_access_token = data['facebook']['page-access-token']
-            return page_access_token
-        except yaml.YAMLError as exc:
-            print(exc)
+        print("Successfully added get_started button with '{}' intent.".format(intent_name))
 
 
 if __name__ == '__main__':

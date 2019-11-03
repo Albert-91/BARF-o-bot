@@ -43,6 +43,7 @@ intents:                                                                        
 # special intents for triggering some scenario cases by intents injection into tracker
 - start_buy_products
 - start_ingredient_distribution
+- start_weather
 
 # ---------------------------------------------------------------------------------------------------------------------#
 slots:                                                                                                           # slots
@@ -149,6 +150,8 @@ actions:                                                                        
 - utter_ingredients_distribution_intro
 - utter_ask_stop_ingredients_distribution
 - utter_continue_ingredients_distribution
+- utter_ask_stop_weather
+- utter_continue_weather
 
 - action_set_out_of_scope_detected
 - action_set_out_of_scope_not_detected
@@ -157,6 +160,7 @@ actions:                                                                        
 # inject intent actions
 - action_inject_intent_start_buy_products
 - action_inject_intent_start_ingredient_distribution
+- action_inject_intent_start_weather
 
 # test actions (ready to use actions for developers to quickly test sth etc).
 # (feel free to change its body if needed during your development)
@@ -290,7 +294,7 @@ templates:                                                                      
 
 ## buy products form - submit
   utter_summarize_weather_form:
-  - text: "W {location} jest {temperature}°C."""
+  - text: "W {location} jest {temperature}°C,\ntemperatura odczuwalna wynosi {feelslike},\nciśnienie wynosi {pressure},\na wilgotność {humidity}%"
 
 # templates related to feedback
   utter_ask_feedback_value:

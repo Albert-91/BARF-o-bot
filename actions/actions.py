@@ -95,7 +95,8 @@ class ResetFormSlotsAction(Action):
         # resets slots used for showcase scenarios to ensure start it fresh again
         return [SlotSet('meat_amount', None),
                 SlotSet('daily_portion', None),
-                SlotSet('weekly_cycle', None)]
+                SlotSet('weekly_cycle', None),
+                SlotSet('location', None)]
 
 
 class InjectIntentStartBuyProductsFormAction(CommonActionMixin, Action):
@@ -114,6 +115,15 @@ class InjectIntentStartIngredientDistributionFormAction(CommonActionMixin, Actio
 
     def run(self, dispatcher, tracker, domain):
         return self.inject_intent('start_ingredient_distribution')
+
+
+class InjectIntentStartWeatherFormAction(CommonActionMixin, Action):
+    """Injects intent `start_weather` to the tracker so stories may handle it accordingly to scenarion neeeds"""
+    def name(self) -> Text:
+        return 'action_inject_intent_start_weather'
+
+    def run(self, dispatcher, tracker, domain):
+        return self.inject_intent('start_weather')
 
 
 class UtterWrongRequestedSlotValueAction(Action):

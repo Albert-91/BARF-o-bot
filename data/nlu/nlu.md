@@ -95,9 +95,11 @@
  
 ## intent: enter_meat_amount
 - [5](number) kg
+- na [11](number) kg
 - [10](number)kg 
 - [8](number) kilo
 - [9](number) kilogramów
+- na [7](number) kilogramów
 - [10](number) k
 - [12](number)kg mięsa 
 - [15](number)kilo mięsa 

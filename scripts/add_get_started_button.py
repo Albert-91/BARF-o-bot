@@ -8,12 +8,9 @@ import requests
 
 def add_get_started_button(intent_name: Text, credential_file_path: Text):
     """
-    curl -X POST -H "Content-Type: application/json" -d '{
-  "get_started": {"payload": "<postback_payload>"}
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>"
-
-    :param intent_name:
-    :return:
+    Function setting "Get_Started" button on a Messenger welcome screen for a new users.
+    :param credential_file_path: Rasa file with Facebook credentials
+    :param intent_name: intent which will be triggered after clicking "get_started" button
     """
     page_access_token = get_token_from_credentials(credential_file_path)
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token="
@@ -21,8 +18,8 @@ def add_get_started_button(intent_name: Text, credential_file_path: Text):
     data = {"get_started": {"payload": "/" + intent_name}}
     data = json.dumps(data)
     r = requests.post(url=url+page_access_token, data=data, headers=headers)
-    print(r.status_code)
-    print(r.json())
+    if r.json()['result'] == 'success':
+        print("Added get_started button with '{}' intent.".format(intent_name))
 
 
 def get_token_from_credentials(credential_file_path: Text) -> Text:

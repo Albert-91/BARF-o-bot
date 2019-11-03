@@ -90,7 +90,7 @@
 - ile mogę
  
 <!-- user ask about weather -->
-## intent: ask_weather
+## intent: weather
 - ładna pogoda dzisiaj
 - ładny dzień
 - jak pogoda
@@ -102,6 +102,12 @@
 - jak dzisiaj na dworze
 - jak dzisiaj na polu
 - jaka dziś pogoda
+- jaka dzisiaj pogoda w [Warszawie](location: Warszawa)
+- jaka pogoda w [Krakowie](location: Kraków)
+- pogoda w [Sosnowcu](location: Sosnowiec)
+- [Radom](location) pogoda
+- pada w [Rzeszowie](location: Rzeszów)
+- jak pogoda w [Lublinie](location: Lublin)
 
 ## intent: menu
 - menu

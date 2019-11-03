@@ -270,6 +270,28 @@ templates:                                                                      
           - {offal_amount} kg podrobów, \n
           - {bones_amount} kg kości."
 
+# buy products form
+  utter_ask_stop_weather:
+  - text: Czy już nie interesuje Cię pogoda?
+
+  utter_continue_weather:
+  - text: W takim razie powiedz...
+
+## buy products form - slots
+  utter_ask_location:
+  - text: To zależy w jakim mieście...
+
+  utter_explain_location:
+  - text: >
+          Podaj miasto w Polsce bym mógł podać Ci pogodę.
+
+  utter_wrong_location:
+    - text: Podałeś niepoprawne miasto.
+
+## buy products form - submit
+  utter_summarize_weather_form:
+  - text: "W {location} jest {temperature}°C."""
+
 # templates related to feedback
   utter_ask_feedback_value:
   - text: Jak przebiegła ta rozmowa?

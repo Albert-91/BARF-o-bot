@@ -3,8 +3,7 @@ import sys
 from typing import Text
 
 import requests
-
-from scripts.data_readers import get_facebook_token_from_credentials
+from data_readers import get_facebook_token_from_credentials
 
 
 def delete_get_started_button(credential_file_path: Text):
@@ -13,6 +12,7 @@ def delete_get_started_button(credential_file_path: Text):
     :param credential_file_path: Rasa file with Facebook credentials
     :param intent_name: intent which will be triggered after clicking "get_started" button
     """
+
     page_access_token = get_facebook_token_from_credentials(credential_file_path)
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token="
     headers = {"Content-Type": "application/json"}

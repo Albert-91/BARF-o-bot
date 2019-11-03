@@ -3,8 +3,7 @@ import sys
 from typing import Text
 
 import requests
-
-from scripts.data_readers import get_facebook_token_from_credentials
+from data_readers import get_facebook_token_from_credentials
 
 
 def add_get_started_button(intent_name: Text, credential_file_path: Text):

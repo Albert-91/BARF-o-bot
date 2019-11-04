@@ -22,6 +22,7 @@ entities:                                                                       
 intents:                                                                                                       # intents
 # ---------------------------------------------------------------------------------------------------------------------#
 - chitchat
+- faq
 - menu
 - out_of_scope
 - affirm
@@ -139,6 +140,7 @@ actions:                                                                        
 
 ## respond actions
 - respond_chitchat
+- respond_faq
 
 ## utterance actions
 - utter_menu

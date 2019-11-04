@@ -11,7 +11,7 @@ If you want to try it then go to [Messenger](https://www.messenger.com/t/1051195
 
 ## Procedures
 
-For development, there are used special credentials files `dev.credentials.yml` that are not stored in repo - every developer shout maintain own versions (that keeps development messenger page credentials etc.). The same file is needed to create on production environment `prod.credentials.yml` and this file is also not stored in repo. The only file `credentials.yml` stored in repo is a template.
+For development, there are used special credentials files `dev.credentials.yml` and `env.py` that are not stored in repo but locally that files need to be store in `config` directory - every developer shout maintain own versions (that keeps development messenger page credentials etc.). The same file is needed to create on production environment `prod.credentials.yml` and this file is also not stored in repo. The only file `credentials.yml` stored in repo is a template.
 
 ### Training a model
 

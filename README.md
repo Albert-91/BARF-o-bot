@@ -11,20 +11,20 @@ If you want to try it then go to [Messenger](https://www.messenger.com/t/1051195
 
 ## Procedures
 
-For development, there are used special credentials files `dev.credentials.yml` that are not stored in repo - every developer shout maintain own versions (that keeps development messenger page credentials etc.). The same file is needed to create on production environment `prod.credentials.yml` and this file is also not stored in repo. The only file `credentials.yml` stored in repo is a template.
+For development, there are used special credentials files `dev.credentials.yml` and `env.py` that are not stored in repo but locally that files need to be store in `config` directory - every developer shout maintain own versions (that keeps development messenger page credentials etc.). The same file is needed to create on production environment `prod.credentials.yml` and this file is also not stored in repo. The only file `credentials.yml` stored in repo is a template.
 
 ### Training a model
 
 Development models is not part of repo and their contains `_dev` suffix. Production models are part of repo and must be stored in `models/` directory with `_prod` suffix.
 
 #### Training development model command (model will be generated as `models/model_dev.tar.gz`): 
-```bash
-$ rasa train --data data --config config/config.yml --domain config/domain.yml --out models --fixed-model-name model_dev
+```fish
+docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model_dev
 ```
 
 #### Training production model command (model will be generated as `models/model_prod.tar.gz`): 
-```bash
-$ rasa train --data data --config config/config.yml --domain config/domain.yml --out models --fixed-model-name model_prod
+```fish
+docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model_prod
 ```
 
 ### Deployment

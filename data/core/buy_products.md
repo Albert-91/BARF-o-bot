@@ -106,11 +106,11 @@
 * start_buy_products  
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products
@@ -126,11 +126,11 @@
   - action_reset_requested_slot   
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products
@@ -144,11 +144,11 @@
 * start_buy_products  
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products
@@ -170,11 +170,11 @@
   - action_reset_requested_slot
   - form_calculate_products_to_buy
   - form{"name": "form_calculate_products_to_buy"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_buy_products

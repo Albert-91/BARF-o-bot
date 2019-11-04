@@ -16,6 +16,7 @@ entities:                                                                       
 
 # project entities
 - feedback_value
+- location
 
 # ---------------------------------------------------------------------------------------------------------------------#
 intents:                                                                                                       # intents
@@ -29,17 +30,20 @@ intents:                                                                        
 - explain
 - showcase_car_loan
 - feedback
-- entered_data
 - buy_products
 - ingredient_distribution
+- weather
+
+# intents to enter data during forms
 - enter_meat_amount
 - enter_weekly_cycle
 - enter_daily_portion
+- enter_location
 
 # special intents for triggering some scenario cases by intents injection into tracker
-
 - start_buy_products
 - start_ingredient_distribution
+- start_weather
 
 # ---------------------------------------------------------------------------------------------------------------------#
 slots:                                                                                                           # slots
@@ -99,6 +103,9 @@ slots:                                                                          
   weekly_cycle:
     type: unfeaturized
 
+  location:
+    type: unfeaturized
+
 # slot used by custom fallback action
   out_of_scope_detected:
     type: bool
@@ -143,6 +150,8 @@ actions:                                                                        
 - utter_ingredients_distribution_intro
 - utter_ask_stop_ingredients_distribution
 - utter_continue_ingredients_distribution
+- utter_ask_stop_weather
+- utter_continue_weather
 
 - action_set_out_of_scope_detected
 - action_set_out_of_scope_not_detected
@@ -151,6 +160,7 @@ actions:                                                                        
 # inject intent actions
 - action_inject_intent_start_buy_products
 - action_inject_intent_start_ingredient_distribution
+- action_inject_intent_start_weather
 
 # test actions (ready to use actions for developers to quickly test sth etc).
 # (feel free to change its body if needed during your development)
@@ -163,6 +173,7 @@ forms:                                                                          
 
 - form_calculate_products_to_buy
 - form_calculate_ingredients_distribution
+- form_weather
 - form_feedback
 
 # ---------------------------------------------------------------------------------------------------------------------#
@@ -262,6 +273,31 @@ templates:                                                                      
           - {liver_amount} kg wątroby, \n
           - {offal_amount} kg podrobów, \n
           - {bones_amount} kg kości."
+
+# buy products form
+  utter_ask_stop_weather:
+  - text: Czy chcesz przerwać poznanie pogody?
+
+  utter_continue_weather:
+  - text: W takim razie powiedz...
+
+## buy products form - slots
+  utter_ask_location:
+  - text: W jakim mieście chcesz poznać pogodę?
+
+  utter_explain_location:
+  - text: >
+          Podaj miasto w Polsce bym mógł podać Ci pogodę.
+
+  utter_wrong_location:
+    - text: Podałeś niepoprawne miasto.
+
+## buy products form - submit
+  utter_summarize_weather_form:
+  - text: "Jest {temperature}°C, temperatura odczuwalna wynosi {feelslike}°C,\nciśnienie jest równe {pressure} hPa, a wilgotność {humidity}%."
+
+  utter_summarize_exception:
+  - text: Przepraszam, ale moja pogodynka chyba wzięła wolne i nie jestem w stanie powiedzieć jaka jest pogoda.
 
 # templates related to feedback
   utter_ask_feedback_value:

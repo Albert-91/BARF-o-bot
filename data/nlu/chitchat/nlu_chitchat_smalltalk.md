@@ -213,20 +213,6 @@
 - gdzie ty jesteś
 - puk puk
 
-<!-- user ask about weather -->
-## intent: chitchat/weather
-- ładna pogoda dzisiaj
-- ładny dzień
-- jak pogoda
-- dobra pogoda
-- pada deszcz
-- pada śnieg
-- wieje
-- wietrznie
-- jak dzisiaj na dworze
-- jak dzisiaj na polu
-- jaka dziś pogoda
-
 <!-- user ask about date/time -->
 ## intent: chitchat/ask_datetime
 <!----- time ----->

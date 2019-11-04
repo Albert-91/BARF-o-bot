@@ -18,13 +18,13 @@ For development, there are used special credentials files `dev.credentials.yml` 
 Development models is not part of repo and their contains `_dev` suffix. Production models are part of repo and must be stored in `models/` directory with `_prod` suffix.
 
 #### Training development model command (model will be generated as `models/model_dev.tar.gz`): 
-```bash
-$ rasa train --data data --config config/config.yml --domain config/domain.yml --out models --fixed-model-name model_dev
+```fish
+docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model_dev
 ```
 
 #### Training production model command (model will be generated as `models/model_prod.tar.gz`): 
-```bash
-$ rasa train --data data --config config/config.yml --domain config/domain.yml --out models --fixed-model-name model_prod
+```fish
+docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model_prod
 ```
 
 ### Deployment

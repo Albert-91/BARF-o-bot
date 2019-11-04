@@ -102,12 +102,14 @@
 - jak dzisiaj na dworze
 - jak dzisiaj na polu
 - jaka dziś pogoda
-- jaka dzisiaj pogoda w [Warszawie](location: Warszawa)
-- jaka pogoda w [Krakowie](location: Kraków)
+- jaka dzisiaj pogoda w [warszawie](location: Warszawa)
+- jaka pogoda w [krakowie](location: Kraków)
 - pogoda w [Sosnowcu](location: Sosnowiec)
+- jaka pogoda w [sosnowcu](location: Sosnowiec)
 - [Radom](location) pogoda
-- pada w [Rzeszowie](location: Rzeszów)
+- pada w [rzeszowie](location: Rzeszów)
 - jak pogoda w [Lublinie](location: Lublin)
+- jaka pogoda w [radomiu](location: Radom)
 
 ## intent: menu
 - menu

@@ -294,7 +294,7 @@ templates:                                                                      
 
 ## buy products form - submit
   utter_summarize_weather_form:
-  - text: "W {location} jest {temperature}°C,\ntemperatura odczuwalna wynosi {feelslike},\nciśnienie wynosi {pressure},\na wilgotność {humidity}%"
+  - text: "Jest {temperature}°C,\ntemperatura odczuwalna wynosi {feelslike}°C,\nciśnienie jest równe {pressure} hPa,\na wilgotność {humidity}%."
 
 # templates related to feedback
   utter_ask_feedback_value:

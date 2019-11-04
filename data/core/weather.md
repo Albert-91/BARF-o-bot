@@ -1,7 +1,6 @@
 ## ingredient distribution button
 ## *scenario*: user chose ingredient distribution
 * weather
-  - action_reset_form_slots
   - action_inject_intent_start_weather
 
 ## ingredient_distribution form processing - happy path

@@ -106,11 +106,11 @@
 * start_ingredient_distribution  
   - form_calculate_ingredients_distribution
   - form{"name": "form_calculate_ingredients_distribution"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_ingredients_distribution
@@ -126,11 +126,11 @@
   - action_reset_requested_slot   
   - form_calculate_ingredients_distribution
   - form{"name": "form_calculate_ingredients_distribution"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_ingredients_distribution
@@ -144,11 +144,11 @@
 * start_ingredient_distribution  
   - form_calculate_ingredients_distribution
   - form{"name": "form_calculate_ingredients_distribution"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_ingredients_distribution
@@ -170,11 +170,11 @@
   - action_reset_requested_slot
   - form_calculate_ingredients_distribution
   - form{"name": "form_calculate_ingredients_distribution"}
-* stop OR menu
+* stop OR menu OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
   - form{"name": null}
-* stop OR menu
+* stop OR menu OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_ingredients_distribution

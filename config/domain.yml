@@ -276,14 +276,14 @@ templates:                                                                      
 
 # buy products form
   utter_ask_stop_weather:
-  - text: Czy już nie interesuje Cię pogoda?
+  - text: Czy chcesz przerwać poznanie pogody?
 
   utter_continue_weather:
   - text: W takim razie powiedz...
 
 ## buy products form - slots
   utter_ask_location:
-  - text: To zależy w jakim mieście...
+  - text: W jakim mieście chcesz poznać pogodę?
 
   utter_explain_location:
   - text: >
@@ -294,7 +294,10 @@ templates:                                                                      
 
 ## buy products form - submit
   utter_summarize_weather_form:
-  - text: "Jest {temperature}°C,\ntemperatura odczuwalna wynosi {feelslike}°C,\nciśnienie jest równe {pressure} hPa,\na wilgotność {humidity}%."
+  - text: "Jest {temperature}°C, temperatura odczuwalna wynosi {feelslike}°C,\nciśnienie jest równe {pressure} hPa, a wilgotność {humidity}%."
+
+  utter_summarize_exception:
+  - text: Przepraszam, ale moja pogodynka chyba wzięła wolne i nie jestem w stanie powiedzieć jaka jest pogoda.
 
 # templates related to feedback
   utter_ask_feedback_value:

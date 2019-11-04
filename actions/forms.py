@@ -1,11 +1,13 @@
 from decimal import Decimal
 from typing import Text, List, Dict, Union, Any
 
+import requests
 from rasa_sdk import Tracker
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
+from config.env import WEATHERSTACK_API_KEY
 from utils.products_calculator import calculate_products_to_buy, calculate_ingredients_distribution
 from utils.string import get_correct_week_word
 from .settings import *
@@ -67,7 +69,7 @@ class CalculateIngredientsDistribution(FormAction):
                                  self.from_entity(entity='number', intent='enter_weekly_cycle')]}
 
     def validate_daily_portion(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker,
-                             domain: Dict[Text, Any]) -> Dict[Text, Any]:
+                               domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
             daily_portion = int(value[0])
             if not 1 < daily_portion <= DAILY_PORTION_UPPER_LIMIT:
@@ -78,7 +80,7 @@ class CalculateIngredientsDistribution(FormAction):
         return {'daily_portion': str(value[0])}
 
     def validate_weekly_cycle(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker,
-                             domain: Dict[Text, Any]) -> Dict[Text, Any]:
+                              domain: Dict[Text, Any]) -> Dict[Text, Any]:
         try:
             weekly_cycle = int(value[0])
             if not 1 < weekly_cycle <= WEEKLY_CYCLE_UPPER_LIMIT:
@@ -122,7 +124,18 @@ class WeatherForm(FormAction):
                              self.from_entity(entity='location', intent='weather')]}
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-
+        location = tracker.get_slot('location')
+        url = "http://api.weatherstack.com/current?access_key={}&query={}".format(WEATHERSTACK_API_KEY, location)
+        response = requests.get(url)
+        try:
+            current_data = response.json()['current']
+            dispatcher.utter_template('utter_summarize_weather_form', tracker,
+                                      temperature=current_data['temperature'],
+                                      feelslike=current_data['feelslike'],
+                                      pressure=current_data['pressure'],
+                                      humidity=current_data['humidity'])
+        except KeyError:
+            dispatcher.utter_template('utter_summarize_exception', tracker)
         return []
 
 

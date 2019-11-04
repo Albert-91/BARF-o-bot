@@ -225,6 +225,7 @@ graph.html
 # credentials file used for local development
 config/dev.credentials.yml
 config/prod.credentials.yml
+config/env.py
 
 # ignore only non-production models
 models/*

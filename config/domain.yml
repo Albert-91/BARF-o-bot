@@ -140,7 +140,6 @@ actions:                                                                        
 
 ## respond actions
 - respond_chitchat
-- respond_faq
 
 ## utterance actions
 - utter_menu

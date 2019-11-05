@@ -14,4 +14,4 @@
 
 ## faq
 * faq
-  - respond_faq
+  - action_respond_faq

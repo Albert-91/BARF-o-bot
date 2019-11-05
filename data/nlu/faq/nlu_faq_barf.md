@@ -18,7 +18,7 @@
 - korzyści z barfa
 - dlaczego barf
 
-## intent: faq/how_feed
+## intent: faq/how_feed_properly
 - jak tym karmić
 - jak wygląda barf w praktyce
 - jak wyglądają barfowe posiłki
@@ -30,6 +30,7 @@
 - odżywianie na barfie
 - jak prawidłowo karmić
 - jak wygląda prawidłowy barfowy posiłek
+- jak karmić barfem
 
 ## intent: faq/how_start_barf
 - jak przejść na barf
@@ -44,3 +45,14 @@
 - czy barfa można mieszać z karmą
 - czy można karmić i mięsem i granulkami
 - mieszanie z karmą
+
+## intent: faq/what_to_avoid
+- czego unikać na barfie
+- czego unika karmiąc barfem
+- czego powienien unikać mój pies
+- czego nie dawać psu na barfie
+- czego nie powinien jeść mój pies
+- co mojemu psu zaszkodzi
+- czego nie powinienem podawać
+- czego nie powinienem dawać psu
+- czym nie powinienem karmić

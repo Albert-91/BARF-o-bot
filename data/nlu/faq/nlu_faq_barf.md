@@ -1,4 +1,4 @@
-## intent: faq/definition_of_barf
+## intent: faq/what_is_barf
 - co to jest barf
 - czym jest barf
 - barf
@@ -15,4 +15,32 @@
 - w czym barf jest lepszy
 - czemu barf jest lepszy od zwykłej karmy
 - czy barf jest lepszy od granulek
+- korzyści z barfa
+- dlaczego barf
 
+## intent: faq/how_feed
+- jak tym karmić
+- jak wygląda barf w praktyce
+- jak wyglądają barfowe posiłki
+- jak karmić na barfie
+- jak prawidłowo karmić
+- karmienie psa na barfie
+- przygotowanie posiłków na barfie
+- jak przygotować barfowy posiłek
+- odżywianie na barfie
+- jak prawidłowo karmić
+- jak wygląda prawidłowy barfowy posiłek
+
+## intent: faq/how_start_barf
+- jak przejść na barf
+- jak wprowadzić barfa
+- można z karmy przejść na barf
+- chcę zacząć karmić barfem
+- jak zacząć barf
+- jak mogę rozpocząć barf
+
+## intent: faq/can_i_mix_with_fodder
+- czy można mieszać z karmą
+- czy barfa można mieszać z karmą
+- czy można karmić i mięsem i granulkami
+- mieszanie z karmą

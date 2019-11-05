@@ -56,6 +56,38 @@
   - respond_chitchat    
   - action_inject_intent_start_weather  
 
+## weather form processing - 1st params gathering interruption by faq
+## *scenario*: form starts then params gathering is interrupted by faq then bot responds faq and restart form
+* start_weather
+  - form_weather
+  - form{"name": "form_weather"}
+* faq
+  - action_default_fallback
+  - slot{"out_of_scope_detected": false}
+  - form{"name": null}
+* faq
+  - action_reset_out_of_scope_detected
+  - slot{"out_of_scope_detected": null}
+  - action_respond_faq    
+  - action_inject_intent_start_weather  
+
+## weather form processing - 2nd and following params gathering interruption by faq
+## *scenario*: form restarts then params gathering is interrupted by faq then bot responds faq and restart form
+  - action_inject_intent_start_weather  
+* start_weather
+  - action_reset_requested_slot 
+  - form_weather
+  - form{"name": "form_weather"}
+* faq
+  - action_default_fallback
+  - slot{"out_of_scope_detected": false}
+  - form{"name": null}
+* faq
+  - action_reset_out_of_scope_detected
+  - slot{"out_of_scope_detected": null}
+  - action_respond_faq    
+  - action_inject_intent_start_weather  
+
 ## weather form processing - 1st params gathering interruption by explain
 ## *scenario*: form starts then params gathering is interrupted by explain then bot utters wrong param 
 ##             value and restart form

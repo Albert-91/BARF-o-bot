@@ -64,6 +64,38 @@
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}
   - respond_chitchat    
+  - action_inject_intent_start_ingredient_distribution 
+
+## ingredient_distribution form processing - 1st params gathering interruption by faq
+## *scenario*: form starts then params gathering is interrupted by faq then bot responds faq and restart form
+* start_ingredient_distribution
+  - form_calculate_ingredients_distribution
+  - form{"name": "form_calculate_ingredients_distribution"}
+* faq
+  - action_default_fallback
+  - slot{"out_of_scope_detected": false}
+  - form{"name": null}
+* faq
+  - action_reset_out_of_scope_detected
+  - slot{"out_of_scope_detected": null}
+  - action_respond_faq
+  - action_inject_intent_start_ingredient_distribution  
+
+## ingredient_distribution form processing - 2nd and following params gathering interruption by faq
+## *scenario*: form restarts then params gathering is interrupted by faq then bot responds faq and restart form
+  - action_inject_intent_start_ingredient_distribution  
+* start_ingredient_distribution
+  - action_reset_requested_slot 
+  - form_calculate_ingredients_distribution
+  - form{"name": "form_calculate_ingredients_distribution"}
+* faq
+  - action_default_fallback
+  - slot{"out_of_scope_detected": false}
+  - form{"name": null}
+* faq
+  - action_reset_out_of_scope_detected
+  - slot{"out_of_scope_detected": null}
+  - action_respond_faq    
   - action_inject_intent_start_ingredient_distribution  
 
 ## ingredient_distribution form processing - 1st params gathering interruption by explain
@@ -228,7 +260,7 @@
 * start_ingredient_distribution  
   - form_calculate_ingredients_distribution
   - form{"name": "form_calculate_ingredients_distribution"}
-* chitchat OR affirm OR deny OR explain OR menu OR out_of_scope
+* chitchat OR affirm OR deny OR explain OR menu OR out_of_scope OR faq
   - action_default_fallback
   - slot{"out_of_scope_detected": true}
   - form{"name": null}
@@ -246,7 +278,7 @@
   - action_reset_requested_slot
   - form_calculate_ingredients_distribution
   - form{"name": "form_calculate_ingredients_distribution"}
-* chitchat OR affirm OR deny OR explain OR menu OR out_of_scope
+* chitchat OR affirm OR deny OR explain OR menu OR out_of_scope OR faq
   - action_default_fallback
   - slot{"out_of_scope_detected": true}
   - form{"name": null}

@@ -34,6 +34,7 @@ intents:                                                                        
 - buy_products
 - ingredient_distribution
 - weather
+- ask_faq
 
 # intents to enter data during forms
 - enter_meat_amount
@@ -45,6 +46,7 @@ intents:                                                                        
 - start_buy_products
 - start_ingredient_distribution
 - start_weather
+- start_faq
 
 # ---------------------------------------------------------------------------------------------------------------------#
 slots:                                                                                                           # slots
@@ -153,6 +155,10 @@ actions:                                                                        
 - utter_continue_ingredients_distribution
 - utter_ask_stop_weather
 - utter_continue_weather
+- utter_ask_faq_intro
+- utter_ask_faq_rephrase
+- utter_ask_stop_faq
+- utter_ask_for_more_faq_questions
 
 ## generic out_of_scope
 - action_set_out_of_scope_detected
@@ -163,6 +169,7 @@ actions:                                                                        
 - action_inject_intent_start_buy_products
 - action_inject_intent_start_ingredient_distribution
 - action_inject_intent_start_weather
+- action_inject_intent_start_faq
 
 # test actions (ready to use actions for developers to quickly test sth etc).
 # (feel free to change its body if needed during your development)
@@ -301,6 +308,19 @@ templates:                                                                      
   utter_summarize_exception:
   - text: Przepraszam, ale moja pogodynka chyba wzięła wolne i nie jestem w stanie powiedzieć jaka jest pogoda.
 
+# ask_faq
+  utter_ask_faq_intro:
+  - text: A więc zadaj mi jakieś pytanie o tematykę BARF-a, a ja postaram Ci się odpowiedzieć ;)
+
+  utter_ask_faq_rephrase:
+  - text: Chyba do końca nie zrozumiałem Twojej intencji, czy aby na pewno była ona związana z BARF-em?
+
+  utter_ask_stop_faq:
+  - text: Czy chcesz przerwać zadawać mi pytania o BARF?
+
+  utter_ask_for_more_faq_questions:
+  - text: W takim razie zadaj mi kolejne pytanie.
+
 # templates related to feedback
   utter_ask_feedback_value:
   - text: Jak przebiegła ta rozmowa?
@@ -334,9 +354,8 @@ templates:                                                                      
       payload: /buy_products
     - title: Proporcje składników
       payload: /ingredient_distribution
-#    - title: Mam pytanie o BARF
-#      # temporary it's buy_products intent
-#      payload: /buy_products
+    - title: Mam pytanie o BARF
+      payload: /ask_faq
 
   utter_anything_else:
   - text: Co chciałbyś teraz zrobić?

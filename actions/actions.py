@@ -125,6 +125,15 @@ class InjectIntentStartWeatherFormAction(CommonActionMixin, Action):
         return self.inject_intent('start_weather')
 
 
+class InjectIntentStartFaqAction(CommonActionMixin, Action):
+    """Injects intent `start_faq` to the tracker so stories may handle it accordingly to scenarion neeeds"""
+    def name(self) -> Text:
+        return 'action_inject_intent_start_faq'
+
+    def run(self, dispatcher, tracker, domain):
+        return self.inject_intent('start_faq')
+
+
 class UtterWrongRequestedSlotValueAction(Action):
     """Utters user with appropriate "wrong" utterance (that informs what values are valid/is expected) related to
        current requested slot. I.e. if current requested slot is `vehicle_age` it displays utterance

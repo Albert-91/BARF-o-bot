@@ -154,6 +154,7 @@ actions:                                                                        
 - utter_ask_stop_weather
 - utter_continue_weather
 
+## generic out_of_scope
 - action_set_out_of_scope_detected
 - action_set_out_of_scope_not_detected
 - action_reset_out_of_scope_detected

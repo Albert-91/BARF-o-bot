@@ -67,3 +67,19 @@ services:
       - "9000"
     depends_on:
       - instance
+
+  # postgres service to store events
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ./db_storage:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      POSTGRES_USER: rasa
+      POSTGRES_DB: rasa
+      POSTGRES_PASSWORD: rasa

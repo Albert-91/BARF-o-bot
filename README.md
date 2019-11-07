@@ -46,7 +46,7 @@ To deploy:
    ```
 1. Run stack called "barfobot":
    ```bash
-   docker stack deploy -c docker-compose-prod.yml barfobot
+   docker stack deploy -c docker-compose.yml barfobot
    ```
 On screen should appear a message that three services was created.
 
@@ -62,5 +62,5 @@ On screen should appear a message that three services was created.
     ```
 1. Run deploy script
     ```bash
-    docker stack deploy -c docker-compose-prod.yml barfobot
+    docker stack deploy -c docker-compose.yml barfobot
     ```

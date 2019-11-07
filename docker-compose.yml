@@ -11,7 +11,6 @@ services:
         condition: on-failure
     volumes:
       - ./config:/app/config
-      - ./db:/app/db
       - ./models:/app/models
       - ./logs:/app/logs
     ports:
@@ -20,9 +19,9 @@ services:
       - run
       - --debug
       - --model
-      - "models/model_dev.tar.gz"
+      - "models/model.tar.gz"
       - --log-file
-      - "logs/logs_dev.txt"
+      - "logs/logs.txt"
       - --endpoints
       - "config/endpoints.yml"
       - --cors

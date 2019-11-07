@@ -54,7 +54,7 @@ On screen should appear a message that three services was created.
 
 1. Pull latest Rasa images and override rasa-sdk image
     ```bash
-    bash update_rasa_images.sh
+    bash prepare_env.sh
     ```
 1. Stop current stack
     ```bash

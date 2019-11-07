@@ -1,12 +1,8 @@
-from typing import Text
+from pathlib import Path
 
-import yaml
+from dotenv import dotenv_values
 
 
-def get_facebook_token_from_credentials(credential_file_path: Text) -> Text:
-    with open(credential_file_path, 'r') as stream:
-        try:
-            data = yaml.safe_load(stream)
-            return data['facebook']['page-access-token']
-        except yaml.YAMLError as exc:
-            print(exc)
+def get_page_access_token_from_dotenv():
+    env_path = Path('.') / '../.env'
+    return dotenv_values(dotenv_path=env_path)['FACEBOOK_PAGE_ACCESS_TOKEN']

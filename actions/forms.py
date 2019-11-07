@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 from typing import Text, List, Dict, Union, Any
 
@@ -7,7 +8,6 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
-from config.env import WEATHERSTACK_API_KEY
 from utils.products_calculator import calculate_products_to_buy, calculate_ingredients_distribution
 from utils.string import get_correct_week_word
 from .settings import *
@@ -125,7 +125,8 @@ class WeatherForm(FormAction):
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         location = tracker.get_slot('location')
-        url = "http://api.weatherstack.com/current?access_key={}&query={}".format(WEATHERSTACK_API_KEY, location)
+        key = os.environ.get('WEATHERSTACK_API_KEY')
+        url = "http://api.weatherstack.com/current?access_key={}&query={}".format(key, location)
         response = requests.get(url)
         try:
             current_data = response.json()['current']

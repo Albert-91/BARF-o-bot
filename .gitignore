@@ -188,7 +188,6 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -214,25 +213,14 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# databases
+# sqlite databases
 *.db
 
 # rasa visualize result
 graph.html
 
-# End of https://www.gitignore.io/api/python,pycharm+all
-
-# credentials file used for local development
-config/dev.credentials.yml
-config/prod.credentials.yml
-config/env.py
-
 # ignore only non-production models
-models/*
-!models/model_prod.tar.gz
+!models/model.tar.gz
 
 # barf-o-bot logs
 logs/*.txt
-
-# barf-o-bot db's
-db/*.db

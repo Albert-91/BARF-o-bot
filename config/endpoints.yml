@@ -2,6 +2,9 @@ action_endpoint:
   url: "http://actions:5055/webhook"
 
 tracker_store:
-    type: SQL
-    dialect: "sqlite"
-    db: "db/barfobot.db"
+  type: sql
+  dialect: "postgresql"
+  url: postgres
+  db: ${BARFOBOT_STORE_DB}
+  username: ${BARFOBOT_STORE_USER}
+  password: ${BARFOBOT_STORE_PASSWORD}

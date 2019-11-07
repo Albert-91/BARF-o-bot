@@ -75,9 +75,8 @@ class GetFacebookUserProfileDataAction(Action):
         sender_id = most_recent_state['sender_id']
         # try getting fb data only if sender_id exists and bot not run in a rasa shell instance
         if sender_id and sender_id != 'default' and not tracker.get_slot('user_name'):
-            credentials_file = os.environ.get('RASA_CREDENTIALS_FILE_PATH', DEFAULT_CREDENTIALS_PATH)
             try:
-                fb_access_token = read_config_file(credentials_file)['facebook']['page-access-token']
+                fb_access_token = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN')
                 r = requests.get(self.fb_get_name_endpoint_tmpl.format(sender_id, fb_access_token)).json()
             except (RequestException, JSONDecodeError, KeyError):
                 return []

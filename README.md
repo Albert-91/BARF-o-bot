@@ -12,20 +12,15 @@ If you want to try it then go to [Messenger](https://www.messenger.com/t/1051195
 
 ## Procedures
 
-For development, there are used special credentials files `dev.credentials.yml` and `env.py` that are not stored in repo but locally that files need to be store in `config` directory - every developer shout maintain own versions (that keeps development messenger page credentials etc.). The same file is needed to create on production environment `prod.credentials.yml` and this file is also not stored in repo. The only file `credentials.yml` stored in repo is a template.
+For all credentials both for production and for development is used special file `.env` which is not tracked in repo. There are environment variables used in files like docker-compose.yml, credentials.yml and some actions.
 
 ### Training a model
 
-Development models is not part of repo and their contains `_dev` suffix. Production models are part of repo and must be stored in `models/` directory with `_prod` suffix.
+Models are part of repo and must be stored in `models/` directory named `model.tar.gz` suffix.
 
-#### Training development model command (model will be generated as `models/model_dev.tar.gz`): 
+#### Training model command (model will be generated as `models/model.tar.gz`): 
 ```fish
-docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model_dev
-```
-
-#### Training production model command (model will be generated as `models/model_prod.tar.gz`): 
-```fish
-docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model_prod
+docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model
 ```
 
 ### Deployment
@@ -37,16 +32,21 @@ docker swarm init
 
 To deploy: 
   * BARF-o-bot service 
-  * Custom action service
+  * Custom action server
   * Duckling service
+  * Postgres service
 
+1. Run script to create directory for Postgres database and pull all necessary images.
+    ```bash
+    bash prepare_env.sh
+    ```
 1. Override rasa-sdk image by command:
    ```bash
    docker build -t barfobot_actions:latest .
    ```
-1. Run stack called "barfobot":
+1. Run stack named "barfobot":
    ```bash
-   docker stack deploy -c docker-compose-prod.yml barfobot
+   docker stack deploy -c docker-compose.yml barfobot
    ```
 On screen should appear a message that three services was created.
 
@@ -54,7 +54,7 @@ On screen should appear a message that three services was created.
 
 1. Pull latest Rasa images and override rasa-sdk image
     ```bash
-    bash update_rasa_images.sh
+    bash prepare_env.sh
     ```
 1. Stop current stack
     ```bash
@@ -62,5 +62,5 @@ On screen should appear a message that three services was created.
     ```
 1. Run deploy script
     ```bash
-    docker stack deploy -c docker-compose-prod.yml barfobot
+    docker stack deploy -c docker-compose.yml barfobot
     ```

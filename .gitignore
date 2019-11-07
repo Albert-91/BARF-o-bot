@@ -225,3 +225,6 @@ graph.html
 
 # barf-o-bot logs
 logs/*.txt
+
+# postgres storage
+db_storage/*

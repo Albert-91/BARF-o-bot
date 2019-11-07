@@ -225,6 +225,3 @@ graph.html
 
 # barf-o-bot logs
 logs/*.txt
-
-# barf-o-bot db's
-db/*.db

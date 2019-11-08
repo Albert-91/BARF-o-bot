@@ -36,19 +36,15 @@ To deploy:
   * Duckling service
   * Postgres service
 
-1. Run script to create directory for Postgres database and pull all necessary images.
+1. Run script to create directory for Postgres database and pull all necessary images and next override rasa-sk image
     ```bash
     bash prepare_env.sh
     ```
-1. Override rasa-sdk image by command:
-   ```bash
-   docker build -t barfobot_actions:latest .
-   ```
 1. Run stack named "barfobot":
    ```bash
    docker stack deploy -c docker-compose.yml barfobot
    ```
-On screen should appear a message that three services was created.
+On screen should appear a message that four services was created.
 
 ## Deploy new version (update a chatbot with trained model via Docker on production)
 

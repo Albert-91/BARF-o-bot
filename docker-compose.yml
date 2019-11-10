@@ -84,8 +84,8 @@ services:
       restart_policy:
         condition: on-failure
     environment:
-      POSTGRES_DB: ${BARFOBOT_STORE_DB}
-      POSTGRES_USER: ${BARFOBOT_STORE_USER}
-      POSTGRES_PASSWORD: ${BARFOBOT_STORE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     depends_on:
       - instance

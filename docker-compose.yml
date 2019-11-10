@@ -44,13 +44,12 @@ services:
       - ./utils:/app/utils
     ports:
       - 5102:5055
+    env_file:
+      - .env
     command:
       - start
       - --actions
       - actions
-    environment:
-      FACEBOOK_PAGE_ACCESS_TOKEN: ${FACEBOOK_PAGE_ACCESS_TOKEN}
-      WEATHERSTACK_API_KEY: ${WEATHERSTACK_API_KEY}
     depends_on:
       - instance
 

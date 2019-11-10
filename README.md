@@ -19,8 +19,8 @@ For all credentials both for production and for development is used special file
 Models are part of repo and must be stored in `models/` directory named `model.tar.gz` suffix.
 
 #### Training model command (model will be generated as `models/model.tar.gz`): 
-```fish
-docker run -v (pwd):/app rasa/rasa:latest-full train --domain config/domain.yml --data data --config config/config.yml --out models --fixed-model-name model
+```bash
+bash train_model.sh
 ```
 
 ### Deployment

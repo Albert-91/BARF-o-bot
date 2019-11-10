@@ -85,9 +85,5 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    environment:
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     depends_on:
       - instance

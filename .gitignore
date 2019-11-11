@@ -228,3 +228,4 @@ logs/*.txt
 
 # postgres storage
 db_storage/*
+db_storage/

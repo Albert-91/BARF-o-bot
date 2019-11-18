@@ -58,10 +58,6 @@ On screen should appear a message that four services was created.
 
 ## Deploy new version (update a chatbot with trained model via Docker on production)
 
-1. Pull latest Rasa images and override rasa-sdk image
-    ```bash
-    bash prepare_env.sh
-    ```
 1. Stop current stack
     ```bash
     docker stack rm barfobot

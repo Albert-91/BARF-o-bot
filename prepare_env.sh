@@ -1,14 +1,18 @@
 #!/bin/bash
 
-if [[ -d db_storage ]]
-    then echo "db_storage directory exists."
+DB_DIR_NAME=db_storage
+
+if [[ -d "$DB_DIR_NAME" ]]; then
+    echo "$DB_DIR_NAME directory exists."
 else
-    mkdir db_storage
-    echo "db_storage directory has been created."
+    mkdir $DB_DIR_NAME
+    echo "$DB_DIR_NAME directory created."
 fi
 
-chmod 777 db_storage
-
-docker pull rasa/rasa:latest-full
-docker build -t barfobot_actions:latest .
-echo "Successfully pulled rasa images and built barfobot_action image."
+ENV_FILE_NAME=.env
+if [ -f "$ENV_FILE_NAME" ]; then
+    echo "$ENV_FILE_NAME file exists"
+else
+    touch $ENV_FILE_NAME
+    echo "$ENV_FILE_NAME file created"
+fi

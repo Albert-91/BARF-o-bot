@@ -4,7 +4,7 @@ services:
 
   # polish version of BARF-o-bot core app
   instance:
-    image: rasa/rasa:latest-full
+    image: rasa/rasa:1.4.3-full
     deploy:
       replicas: 1
       restart_policy:

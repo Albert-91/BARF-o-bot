@@ -40,6 +40,16 @@ To deploy:
     ```bash
     bash prepare_env.sh
     ```
+1. Fill in all credentials in .env file with all names of environments variables the same as below WITHOUT quotation marks:
+```.env
+FACEBOOK_VERIFY=
+FACEBOOK_SECRET=
+FACEBOOK_PAGE_ACCESS_TOKEN=
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+WEATHERSTACK_API_KEY=
+```
 1. Run stack named "barfobot":
    ```bash
    docker stack deploy -c docker-compose.yml barfobot

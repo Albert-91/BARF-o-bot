@@ -60,28 +60,28 @@
   - respond_chitchat
   - action_inject_intent_start_faq
 
-## faq presentation - affirm/deny/menu/out_of_scope/explain instead of faq
-## *scenario*: 1st affirm/deny/menu/out_of_scope/explain intent after starting showcase "solve problems", then bot responds asking for rephrase then listen to next user input
+## faq presentation - out_of_scope/explain instead of faq
+## *scenario*: 1st out_of_scope/explain intent after starting showcase "solve problems", then bot responds asking for rephrase then listen to next user input
 * start_faq
   - action_listen
-* affirm OR deny OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* affirm OR deny OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}  
   - utter_ask_faq_rephrase
   - action_inject_intent_start_faq
 
-## faq presentation - affirm/deny/menu/out_of_scope/explain instead of faq after some intent
-## *scenario*: 2nd and following affirm/deny/menu/out_of_scope/explain intent after starting showcase "solve problems", then bot responds asking for rephrase then listen to next user input
+## faq presentation - out_of_scope/explain instead of faq after some intent
+## *scenario*: 2nd and following out_of_scope/explain intent after starting showcase "solve problems", then bot responds asking for rephrase then listen to next user input
   - action_inject_intent_start_faq
 * start_faq
   - action_listen
-* affirm OR deny OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* affirm OR deny OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain OR weather
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}  
   - utter_ask_faq_rephrase
@@ -159,7 +159,7 @@
 ## *scenario*: 1st intent is generic "out_of_scope" after starting showcase "solve problems" then, then bot responds asking for rephrase
 * start_faq
   - action_listen
-* chitchat OR faq OR affirm OR deny OR explain OR menu OR out_of_scope
+* chitchat OR faq OR affirm OR deny OR explain OR menu OR out_of_scope OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": true}
 * out_of_scope
@@ -173,7 +173,7 @@
   - action_inject_intent_start_faq
 * start_faq
   - action_listen
-* chitchat OR faq OR affirm OR deny OR explain OR menu OR out_of_scope
+* chitchat OR faq OR affirm OR deny OR explain OR menu OR out_of_scope OR weather
   - action_default_fallback
   - slot{"out_of_scope_detected": true}
 * out_of_scope

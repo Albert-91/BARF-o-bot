@@ -2,7 +2,7 @@
 
 ## greet
 * chitchat/greet
-  - Cześć {user_name}! Jestem BARF-o-bot. W czym mogę pomóc?
+  - Cześć! Jestem BARF-o-bot. W czym mogę pomóc?
 
 ## bye
 * chitchat/bye

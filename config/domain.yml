@@ -161,6 +161,7 @@ actions:                                                                        
 - utter_ask_for_more_faq_questions
 - utter_ask_me_next_question
 - utter_thumbsup
+- utter_ask_me_about_barf
 
 ## generic out_of_scope
 - action_set_out_of_scope_detected
@@ -331,6 +332,9 @@ templates:                                                                      
   - text: Dobrze Ci idzie! Zadaj mi kolejne pytanie
   - text: Poproszę o kolejne pytanie ;)
   - text: Pytaj dalej!
+
+  utter_ask_me_about_barf:
+  - text: Zapytaj mnie o coś związanego z BARF-em
 
 # templates related to feedback
   utter_ask_feedback_value:

@@ -62,10 +62,10 @@
 ## *scenario*: 1st affirm/deny/menu/out_of_scope/explain intent after starting showcase "solve problems", then bot responds asking for rephrase then listen to next user input
 * start_faq
   - action_listen
-* affirm OR deny OR menu OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* affirm OR deny OR menu OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}  
   - utter_ask_faq_rephrase
@@ -76,10 +76,10 @@
   - action_inject_intent_start_faq
 * start_faq
   - action_listen
-* affirm OR deny OR menu OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* affirm OR deny OR menu OR out_of_scope OR explain
+* affirm OR deny OR out_of_scope OR explain
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}  
   - utter_ask_faq_rephrase
@@ -89,10 +89,10 @@
 ## *scenario*: 1st stop intent after starting showcase "solve problems", then bot responds asking about quit from this showcase and user denies
 * start_faq
   - action_listen
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_faq
@@ -105,10 +105,10 @@
   - action_inject_intent_start_faq
 * start_faq
   - action_listen
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_faq
@@ -120,10 +120,10 @@
 ## *scenario*: 1st stop intent after starting showcase "solve problems", then bot responds asking about quit from this showcase and user affirms, then bot asking for feedback
 * start_faq
   - action_listen
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_faq
@@ -139,10 +139,10 @@
   - action_inject_intent_start_faq
 * start_faq
   - action_listen
-* stop
+* stop OR menu
   - action_default_fallback
   - slot{"out_of_scope_detected": false}
-* stop
+* stop OR menu
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}    
   - utter_ask_stop_faq

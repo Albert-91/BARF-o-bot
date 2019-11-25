@@ -3,10 +3,8 @@ from json import JSONDecodeError
 from typing import Text
 
 import requests
-from rasa.constants import DEFAULT_CREDENTIALS_PATH
-from rasa.utils.io import read_config_file
 from rasa_sdk import Action
-from rasa_sdk.events import SlotSet, ActionExecuted, UserUttered, AllSlotsReset
+from rasa_sdk.events import SlotSet, ActionExecuted, UserUttered
 from requests import RequestException
 
 

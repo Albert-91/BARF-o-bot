@@ -251,7 +251,7 @@ templates:                                                                      
   - text: A więc nadszedł czas na dzielenie mięsa ...
 
   utter_ask_stop_ingredients_distribution:
-    - text: Czy chcesz zakończyć obliczanie wielkości BARF-owych składników?
+  - text: Czy chcesz zakończyć obliczanie wielkości BARF-owych składników?
 
   utter_continue_ingredients_distribution:
   - text: W takim razie kontynuujmy.
@@ -268,7 +268,7 @@ templates:                                                                      
           Podana wartość musi być większa od zera.
 
   utter_wrong_daily_portion:
-    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze bądź równe 3000 gramów!
+  - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze bądź równe 3000 gramów!
 
   ### weekly cycle slot
   utter_ask_weekly_cycle:

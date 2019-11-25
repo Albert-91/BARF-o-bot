@@ -15,6 +15,7 @@
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}
   - action_respond_faq
+  - utter_ask_me_next_question
   - action_inject_intent_start_faq
 
 ## faq presentation - happy path
@@ -29,6 +30,7 @@
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}
   - action_respond_faq
+  - utter_ask_me_next_question
   - action_inject_intent_start_faq
 
 ## faq presentation - chitchat instead of faq

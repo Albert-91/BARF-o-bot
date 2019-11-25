@@ -159,6 +159,8 @@ actions:                                                                        
 - utter_ask_faq_rephrase
 - utter_ask_stop_faq
 - utter_ask_for_more_faq_questions
+- utter_ask_me_next_question
+- utter_thumbsup
 
 ## generic out_of_scope
 - action_set_out_of_scope_detected
@@ -324,6 +326,11 @@ templates:                                                                      
 
   utter_ask_for_more_faq_questions:
   - text: W takim razie zadaj mi kolejne pytanie.
+
+  utter_ask_me_next_question:
+  - text: Dobrze Ci idzie! Zadaj mi kolejne pytanie
+  - text: Poproszę o kolejne pytanie ;)
+  - text: Pytaj dalej!
 
 # templates related to feedback
   utter_ask_feedback_value:

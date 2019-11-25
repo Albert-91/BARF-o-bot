@@ -211,6 +211,10 @@ templates:                                                                      
   - text: Nie mogę Ci w tym pomóc, może spróbujmy czegoś innego?.
   - text: Nawet ja nie jestem doskonały - nie dam rady spełnić tej prośby. Mogę dla Ciebie zrobić coś jeszcze?"
 
+  utter_thumbsup:
+  - text: 👍
+  - text: Okej.
+
 # buy products form
   utter_buy_products_intro:
   - text: A więc zamierzasz zrobić BARF-owe zakupy dla swojego psiaka...

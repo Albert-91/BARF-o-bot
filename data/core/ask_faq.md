@@ -44,6 +44,7 @@
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}
   - respond_chitchat
+  - utter_ask_me_about_barf
   - action_inject_intent_start_faq
 
 ## faq presentation - chitchat instead of faq
@@ -58,6 +59,7 @@
   - action_reset_out_of_scope_detected
   - slot{"out_of_scope_detected": null}
   - respond_chitchat
+  - utter_ask_me_about_barf
   - action_inject_intent_start_faq
 
 ## faq presentation - out_of_scope/explain instead of faq

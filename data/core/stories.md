@@ -5,9 +5,17 @@
   - action_reset_form_slots
   
 ## functional intents detected without any context
-* affirm OR deny OR explain OR out_of_scope
+* explain OR out_of_scope
   - utter_out_of_scope
+
+## just affirm or deny
+* affirm OR deny
+  - utter_thumbsup
 
 ## chitchat
 * chitchat
   - respond_chitchat
+
+## faq
+* faq
+  - action_respond_faq

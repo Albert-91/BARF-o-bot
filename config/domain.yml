@@ -22,6 +22,7 @@ entities:                                                                       
 intents:                                                                                                       # intents
 # ---------------------------------------------------------------------------------------------------------------------#
 - chitchat
+- faq
 - menu
 - out_of_scope
 - affirm
@@ -33,6 +34,7 @@ intents:                                                                        
 - buy_products
 - ingredient_distribution
 - weather
+- ask_faq
 
 # intents to enter data during forms
 - enter_meat_amount
@@ -44,6 +46,7 @@ intents:                                                                        
 - start_buy_products
 - start_ingredient_distribution
 - start_weather
+- start_faq
 
 # ---------------------------------------------------------------------------------------------------------------------#
 slots:                                                                                                           # slots
@@ -152,7 +155,15 @@ actions:                                                                        
 - utter_continue_ingredients_distribution
 - utter_ask_stop_weather
 - utter_continue_weather
+- utter_ask_faq_intro
+- utter_ask_faq_rephrase
+- utter_ask_stop_faq
+- utter_ask_for_more_faq_questions
+- utter_ask_me_next_question
+- utter_thumbsup
+- utter_ask_me_about_barf
 
+## generic out_of_scope
 - action_set_out_of_scope_detected
 - action_set_out_of_scope_not_detected
 - action_reset_out_of_scope_detected
@@ -161,6 +172,7 @@ actions:                                                                        
 - action_inject_intent_start_buy_products
 - action_inject_intent_start_ingredient_distribution
 - action_inject_intent_start_weather
+- action_inject_intent_start_faq
 
 # test actions (ready to use actions for developers to quickly test sth etc).
 # (feel free to change its body if needed during your development)
@@ -202,6 +214,10 @@ templates:                                                                      
   - text: Nie mogę Ci w tym pomóc, może spróbujmy czegoś innego?.
   - text: Nawet ja nie jestem doskonały - nie dam rady spełnić tej prośby. Mogę dla Ciebie zrobić coś jeszcze?"
 
+  utter_thumbsup:
+  - text: 👍
+  - text: Okej.
+
 # buy products form
   utter_buy_products_intro:
   - text: A więc zamierzasz zrobić BARF-owe zakupy dla swojego psiaka...
@@ -236,7 +252,7 @@ templates:                                                                      
   - text: A więc nadszedł czas na dzielenie mięsa ...
 
   utter_ask_stop_ingredients_distribution:
-    - text: Czy chcesz zakończyć obliczanie wielkości BARF-owych składników?
+  - text: Czy chcesz zakończyć obliczanie wielkości BARF-owych składników?
 
   utter_continue_ingredients_distribution:
   - text: W takim razie kontynuujmy.
@@ -253,7 +269,7 @@ templates:                                                                      
           Podana wartość musi być większa od zera.
 
   utter_wrong_daily_portion:
-    - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze bądź równe 3000 gramów!
+  - text: Podałeś niepoprawną wartość. Możesz podać wartości tylko większe od zera i mniejsze bądź równe 3000 gramów!
 
   ### weekly cycle slot
   utter_ask_weekly_cycle:
@@ -299,6 +315,27 @@ templates:                                                                      
   utter_summarize_exception:
   - text: Przepraszam, ale moja pogodynka chyba wzięła wolne i nie jestem w stanie powiedzieć jaka jest pogoda.
 
+# ask_faq
+  utter_ask_faq_intro:
+  - text: A więc zadaj mi jakieś pytanie o tematykę BARF-a, a ja postaram Ci się odpowiedzieć ;)
+
+  utter_ask_faq_rephrase:
+  - text: Chyba do końca nie zrozumiałem Twojej intencji, czy aby na pewno była ona związana z BARF-em?
+
+  utter_ask_stop_faq:
+  - text: Czy chcesz przerwać zadawać mi pytania o BARF?
+
+  utter_ask_for_more_faq_questions:
+  - text: W takim razie zadaj mi kolejne pytanie.
+
+  utter_ask_me_next_question:
+  - text: Dobrze Ci idzie! Zadaj mi kolejne pytanie
+  - text: Poproszę o kolejne pytanie ;)
+  - text: Pytaj dalej!
+
+  utter_ask_me_about_barf:
+  - text: Zapytaj mnie o coś związanego z BARF-em
+
 # templates related to feedback
   utter_ask_feedback_value:
   - text: Jak przebiegła ta rozmowa?
@@ -332,9 +369,8 @@ templates:                                                                      
       payload: /buy_products
     - title: Proporcje składników
       payload: /ingredient_distribution
-#    - title: Mam pytanie o BARF
-#      # temporary it's buy_products intent
-#      payload: /buy_products
+    - title: Mam pytanie o BARF
+      payload: /ask_faq
 
   utter_anything_else:
   - text: Co chciałbyś teraz zrobić?

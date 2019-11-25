@@ -3,10 +3,8 @@ from json import JSONDecodeError
 from typing import Text
 
 import requests
-from rasa.constants import DEFAULT_CREDENTIALS_PATH
-from rasa.utils.io import read_config_file
 from rasa_sdk import Action
-from rasa_sdk.events import SlotSet, ActionExecuted, UserUttered, AllSlotsReset
+from rasa_sdk.events import SlotSet, ActionExecuted, UserUttered
 from requests import RequestException
 
 
@@ -123,6 +121,15 @@ class InjectIntentStartWeatherFormAction(CommonActionMixin, Action):
 
     def run(self, dispatcher, tracker, domain):
         return self.inject_intent('start_weather')
+
+
+class InjectIntentStartFaqAction(CommonActionMixin, Action):
+    """Injects intent `start_faq` to the tracker so stories may handle it accordingly to scenarion neeeds"""
+    def name(self) -> Text:
+        return 'action_inject_intent_start_faq'
+
+    def run(self, dispatcher, tracker, domain):
+        return self.inject_intent('start_faq')
 
 
 class UtterWrongRequestedSlotValueAction(Action):

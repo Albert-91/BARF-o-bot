@@ -6,7 +6,7 @@ from dotenv import dotenv_values
 
 
 def do_typing_on(psid):
-    page_access_token = get_page_access_token_from_dotenv()
+    page_access_token = get_page_access_token()
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token="
     headers = {"Content-Type": "application/json"}
     data = {"recipient": {"id": psid}, "sender_action": "typing_on"}
@@ -14,7 +14,7 @@ def do_typing_on(psid):
     requests.post(url=url+page_access_token, data=data, headers=headers)
 
 
-def get_page_access_token_from_dotenv():
+def get_page_access_token():
     env_path = Path('.') / '../.env'
     return dotenv_values(dotenv_path=env_path)['FACEBOOK_PAGE_ACCESS_TOKEN']
 

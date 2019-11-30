@@ -1,14 +1,14 @@
 import json
 
 import requests
-from data_readers import get_page_access_token_from_dotenv
+from data_readers import get_page_access_token
 
 
 def delete_get_started_button():
     """
     Function removing "Get_Started" button from Messenger welcome screen for a new users.
     """
-    page_access_token = get_page_access_token_from_dotenv()
+    page_access_token = get_page_access_token()
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token="
     headers = {"Content-Type": "application/json"}
     data = {"fields": ["get_started"]}

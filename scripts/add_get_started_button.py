@@ -3,7 +3,7 @@ import sys
 from typing import Text
 
 import requests
-from data_readers import get_page_access_token
+from utils.data_readers import get_page_access_token
 
 
 def add_get_started_button(intent_name: Text):

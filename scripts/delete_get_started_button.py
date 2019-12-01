@@ -1,7 +1,8 @@
 import json
 
 import requests
-from data_readers import get_page_access_token
+
+from utils.data_readers import get_page_access_token
 
 
 def delete_get_started_button():

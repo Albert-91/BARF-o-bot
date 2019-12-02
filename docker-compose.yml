@@ -13,6 +13,7 @@ services:
       - ./config:/app/config
       - ./models:/app/models
       - ./logs:/app/logs
+      - ./connectors:/app/connectors
     ports:
       - 5101:5005
     env_file:

@@ -1,15 +1,18 @@
 import hashlib
 import hmac
 import logging
+import time
+from typing import Text, List, Dict, Any, Callable, Awaitable, Iterable
+
 from fbmessenger import MessengerClient
 from fbmessenger.attachments import Image
 from fbmessenger.elements import Text as FBText
 from fbmessenger.quick_replies import QuickReplies, QuickReply
+from rasa.core.channels.channel import UserMessage, OutputChannel, InputChannel
 from sanic import Blueprint, response
 from sanic.request import Request
-from typing import Text, List, Dict, Any, Callable, Awaitable, Iterable
 
-from rasa.core.channels.channel import UserMessage, OutputChannel, InputChannel
+from scripts.typing_request import do_typing, TypingState
 
 logger = logging.getLogger(__name__)
 

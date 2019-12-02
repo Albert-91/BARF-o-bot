@@ -136,12 +136,9 @@ class MessengerBot(OutputChannel):
 
     @staticmethod
     def show_typing(recipient_id: Text, time_amount: int):
-        from scripts.typing_request import do_typing, TypingState
-        import time
-
-        do_typing(recipient_id, TypingState.TYPING_ON.value)
+        do_typing(recipient_id, TypingState.TYPING_ON)
         time.sleep(time_amount)
-        do_typing(recipient_id, TypingState.TYPING_OFF.value)
+        do_typing(recipient_id, TypingState.TYPING_OFF)
 
     async def send_text_message(
         self, recipient_id: Text, text: Text, **kwargs: Any

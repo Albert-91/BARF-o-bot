@@ -131,10 +131,11 @@ class MessengerBot(OutputChannel):
     def send(self, recipient_id: Text, element: Any) -> None:
         """Sends a message to the recipient using the messenger client."""
 
+        typing_time = self.calculate_time_typing(element.to_dict())
+        self.show_typing(recipient_id, typing_time)
         # this is a bit hacky, but the client doesn't have a proper API to
         # send messages but instead expects the incoming sender to be present
         # which we don't have as it is stored in the input channel.
-        self.show_typing(recipient_id, 2)
         self.messenger_client.send(element.to_dict(), recipient_id, "RESPONSE")
 
     @staticmethod

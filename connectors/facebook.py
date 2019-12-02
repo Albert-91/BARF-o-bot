@@ -131,7 +131,17 @@ class MessengerBot(OutputChannel):
         # this is a bit hacky, but the client doesn't have a proper API to
         # send messages but instead expects the incoming sender to be present
         # which we don't have as it is stored in the input channel.
+        self.show_typing(recipient_id, 2)
         self.messenger_client.send(element.to_dict(), recipient_id, "RESPONSE")
+
+    @staticmethod
+    def show_typing(recipient_id: Text, time_amount: int):
+        from scripts.typing_request import do_typing, TypingState
+        import time
+
+        do_typing(recipient_id, TypingState.TYPING_ON.value)
+        time.sleep(time_amount)
+        do_typing(recipient_id, TypingState.TYPING_OFF.value)
 
     async def send_text_message(
         self, recipient_id: Text, text: Text, **kwargs: Any

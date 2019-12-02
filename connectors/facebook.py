@@ -12,6 +12,7 @@ from rasa.core.channels.channel import UserMessage, OutputChannel, InputChannel
 from sanic import Blueprint, response
 from sanic.request import Request
 
+from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME
 from scripts.typing_request import do_typing, TypingState
 
 logger = logging.getLogger(__name__)
@@ -143,6 +144,15 @@ class MessengerBot(OutputChannel):
         do_typing(recipient_id, TypingState.TYPING_ON)
         time.sleep(time_amount)
         do_typing(recipient_id, TypingState.TYPING_OFF)
+
+    @staticmethod
+    def calculate_time_typing(message: Dict) -> int:
+        try:
+            message_length = len(message['text'])
+            typing_time = int(message_length / AVARAGE_SIGN_PER_SECOND)
+            return typing_time if typing_time < MAXIMUM_TYPING_TIME else MAXIMUM_TYPING_TIME
+        except KeyError:
+            return DEFAULT_TYPING_TIME
 
     async def send_text_message(
         self, recipient_id: Text, text: Text, **kwargs: Any

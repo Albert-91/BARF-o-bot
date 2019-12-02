@@ -10,6 +10,7 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
+      - ./actions:/app/actions
       - ./config:/app/config
       - ./models:/app/models
       - ./logs:/app/logs

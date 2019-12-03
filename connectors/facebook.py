@@ -13,7 +13,7 @@ from sanic import Blueprint, response
 from sanic.request import Request
 
 from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME
-from scripts.typing_request import sender_action_request, SenderAction
+from scripts.facebook_request import sender_action_request, SenderAction
 
 logger = logging.getLogger(__name__)
 

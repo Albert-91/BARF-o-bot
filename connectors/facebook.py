@@ -12,7 +12,7 @@ from rasa.core.channels.channel import UserMessage, OutputChannel, InputChannel
 from sanic import Blueprint, response
 from sanic.request import Request
 
-from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME
+from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME, TIME_FROM_MARK_SEEN_TO_TYPING
 from scripts.facebook_request import sender_action_request, SenderAction
 
 logger = logging.getLogger(__name__)
@@ -133,14 +133,16 @@ class MessengerBot(OutputChannel):
         """Sends a message to the recipient using the messenger client."""
 
         typing_time = self.calculate_time_typing(element.to_dict())
-        self.show_typing(recipient_id, typing_time)
+        self.do_sender_actions(recipient_id, typing_time)
         # this is a bit hacky, but the client doesn't have a proper API to
         # send messages but instead expects the incoming sender to be present
         # which we don't have as it is stored in the input channel.
         self.messenger_client.send(element.to_dict(), recipient_id, "RESPONSE")
 
     @staticmethod
-    def show_typing(recipient_id: Text, time_amount: int):
+    def do_sender_actions(recipient_id: Text, time_amount: int):
+        sender_action_request(recipient_id, SenderAction.MARK_SEEN)
+        time.sleep(TIME_FROM_MARK_SEEN_TO_TYPING)
         sender_action_request(recipient_id, SenderAction.TYPING_ON)
         time.sleep(time_amount)
         sender_action_request(recipient_id, SenderAction.TYPING_OFF)

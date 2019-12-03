@@ -10,9 +10,12 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
+      - ./actions:/app/actions
       - ./config:/app/config
-      - ./models:/app/models
+      - ./connectors:/app/connectors
       - ./logs:/app/logs
+      - ./models:/app/models
+      - ./scripts:/app/scripts
     ports:
       - 5101:5005
     env_file:

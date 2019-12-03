@@ -151,7 +151,7 @@ class MessengerBot(OutputChannel):
             message_length = len(message['text'])
             typing_time = int(message_length / AVARAGE_SIGN_PER_SECOND)
             if typing_time < MINIMUM_TYPING_TIME:
-                typing_time = MINIMUM_TYPING_TIME
+                return MINIMUM_TYPING_TIME
             return typing_time if typing_time < MAXIMUM_TYPING_TIME else MAXIMUM_TYPING_TIME
         except KeyError:
             return DEFAULT_TYPING_TIME

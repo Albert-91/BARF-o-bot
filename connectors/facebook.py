@@ -13,7 +13,7 @@ from sanic import Blueprint, response
 from sanic.request import Request
 
 from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME
-from scripts.typing_request import do_typing, TypingState
+from scripts.typing_request import sender_action_request, TypingState
 
 logger = logging.getLogger(__name__)
 
@@ -141,9 +141,9 @@ class MessengerBot(OutputChannel):
 
     @staticmethod
     def show_typing(recipient_id: Text, time_amount: int):
-        do_typing(recipient_id, TypingState.TYPING_ON)
+        sender_action_request(recipient_id, TypingState.TYPING_ON)
         time.sleep(time_amount)
-        do_typing(recipient_id, TypingState.TYPING_OFF)
+        sender_action_request(recipient_id, TypingState.TYPING_OFF)
 
     @staticmethod
     def calculate_time_typing(message: Dict) -> int:

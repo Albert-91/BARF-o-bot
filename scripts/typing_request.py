@@ -11,7 +11,7 @@ class TypingState(Enum):
     TYPING_OFF = "typing_off"
 
 
-def do_typing(psid: Text, typing_action: TypingState):
+def sender_action_request(psid: Text, typing_action: TypingState):
     page_access_token = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN')
     url = "https://graph.facebook.com/v2.6/me/messages?access_token="
     headers = {"Content-Type": "application/json"}

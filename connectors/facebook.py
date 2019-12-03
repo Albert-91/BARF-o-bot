@@ -141,6 +141,8 @@ class MessengerBot(OutputChannel):
 
     @staticmethod
     def do_sender_actions(recipient_id: Text, time_amount: int):
+        """Marks user message as seen and next show typing dots for specified amount of time"""
+
         sender_action_request(recipient_id, SenderAction.MARK_SEEN)
         time.sleep(TIME_FROM_MARK_SEEN_TO_TYPING)
         sender_action_request(recipient_id, SenderAction.TYPING_ON)
@@ -149,6 +151,8 @@ class MessengerBot(OutputChannel):
 
     @staticmethod
     def calculate_time_typing(message: Dict) -> int:
+        """Calculates time between typing on and typing off request."""
+
         try:
             message_length = len(message['text'])
             typing_time = int(message_length / AVARAGE_SIGN_PER_SECOND)

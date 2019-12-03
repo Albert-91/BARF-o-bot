@@ -12,10 +12,10 @@ class SenderAction(Enum):
     MARK_SEEN = "mark_seen"
 
 
-def sender_action_request(psid: Text, typing_action: SenderAction):
+def sender_action_request(psid: Text, action: SenderAction):
     page_access_token = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN')
     url = "https://graph.facebook.com/v2.6/me/messages?access_token="
     headers = {"Content-Type": "application/json"}
-    data = {"recipient": {"id": psid}, "sender_action": typing_action.value}
+    data = {"recipient": {"id": psid}, "sender_action": action.value}
     data = json.dumps(data)
     requests.post(url=url+page_access_token, data=data, headers=headers)

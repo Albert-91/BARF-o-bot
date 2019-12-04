@@ -34,13 +34,17 @@ class FacebookRequest:
 
     def send_post_request(self, data):
         r = requests.post(url=self.api_url, data=data, headers=self.headers)
-        if r.json()['result'] == 'success':
+        if 'error' not in r.json().keys():
             print("Success.")
+        else:
+            print(r.json())
 
     def send_delete_request(self, data):
         r = requests.delete(url=self.api_url, data=data, headers=self.headers)
-        if r.json()['result'] == 'success':
+        if 'error' not in r.json().keys():
             print("Success.")
+        else:
+            print(r.json())
 
 
 class SenderActions(FacebookRequest):
@@ -80,9 +84,7 @@ class GetStartedButton(FacebookRequest):
         self.send_delete_request(data=data)
 
 
-# a = GetStartedButton()
-# a.add()
-# a.delete()
+
 
 from utils.data_readers import get_page_access_token
 

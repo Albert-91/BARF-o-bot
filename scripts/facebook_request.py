@@ -53,7 +53,7 @@ class MessagesRequest(FacebookRequest):
 
 class MessengerProfileRequest(FacebookRequest):
 
-    MESSENGER_PROFILE_ENDPOINT = "https://graph.facebook.com/v2.6/me/messenger_profile"
+    MESSENGER_PROFILE_ENDPOINT = "https://graph.facebook.com/v5.0/me/messenger_profile"
 
     @property
     def endpoint(self):

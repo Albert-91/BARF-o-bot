@@ -1,6 +1,7 @@
 import json
 import logging
 from enum import Enum
+from typing import List, Dict
 from urllib.parse import urlencode
 
 import requests
@@ -103,5 +104,29 @@ class GetStartedButton(MessengerProfileRequest):
         Method's removing "Get_Started" button from Messenger welcome screen for a new users.
         """
         data = {"fields": ["get_started"]}
+        data = json.dumps(data)
+        self.send_delete_request(data=data, endpoint=self.endpoint)
+
+
+class PersistentMenu(MessengerProfileRequest):
+
+    def __init__(self, token):
+        super().__init__(token)
+
+    def set(self, actions: List[Dict], locale="default"):
+        data = {
+            "persistent_menu": [
+                {
+                    "locale": locale,
+                    "composer_input_disabled": False,
+                    "call_to_actions": actions
+                }
+            ]
+        }
+        data = json.dumps(data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
+
+    def delete(self):
+        data = {"fields": ["persistent_menu"]}
         data = json.dumps(data)
         self.send_delete_request(data=data, endpoint=self.endpoint)

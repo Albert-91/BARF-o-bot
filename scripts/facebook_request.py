@@ -84,8 +84,8 @@ class SenderActions(MessagesRequest):
 
 class GetStartedButton(MessengerProfileRequest):
 
-    def __init__(self, token, psid, intent=None):
-        super().__init__(token, psid)
+    def __init__(self, token, intent=None):
+        super().__init__(token)
         self.intent = intent
 
     def add(self):

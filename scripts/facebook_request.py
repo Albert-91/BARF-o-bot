@@ -89,11 +89,19 @@ class GetStartedButton(MessengerProfileRequest):
         self.intent = intent
 
     def add(self):
+        """
+        Method's setting "Get_Started" button on a Messenger welcome screen for a new users.
+        :param intent_name: intent which will be triggered after clicking "get_started" button
+        """
+
         data = {"get_started": {"payload": "/" + self.intent}}
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 
     def delete(self):
+        """
+        Method's removing "Get_Started" button from Messenger welcome screen for a new users.
+        """
         data = {"fields": ["get_started"]}
         data = json.dumps(data)
         self.send_delete_request(data=data, endpoint=self.endpoint)

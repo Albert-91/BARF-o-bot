@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import logging
+import os
 import time
 from typing import Text, List, Dict, Any, Callable, Awaitable, Iterable
 
@@ -12,8 +13,9 @@ from rasa.core.channels.channel import UserMessage, OutputChannel, InputChannel
 from sanic import Blueprint, response
 from sanic.request import Request
 
-from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME, TIME_FROM_MARK_SEEN_TO_TYPING
-from scripts.facebook_request import sender_action_request, SenderAction
+from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME, \
+    TIME_FROM_MARK_SEEN_TO_TYPING
+from scripts.facebook_request import SenderActions
 
 logger = logging.getLogger(__name__)
 
@@ -143,11 +145,13 @@ class MessengerBot(OutputChannel):
     def do_sender_actions(recipient_id: Text, time_amount: int):
         """Marks user message as seen and next show typing dots for specified amount of time"""
 
-        sender_action_request(recipient_id, SenderAction.MARK_SEEN)
+        page_access_token = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN')
+        sender_action = SenderActions(page_access_token, recipient_id)
+        sender_action.mark_seen()
         time.sleep(TIME_FROM_MARK_SEEN_TO_TYPING)
-        sender_action_request(recipient_id, SenderAction.TYPING_ON)
+        sender_action.typing_on()
         time.sleep(time_amount)
-        sender_action_request(recipient_id, SenderAction.TYPING_OFF)
+        sender_action.typing_off()
 
     @staticmethod
     def calculate_time_typing(message: Dict) -> int:

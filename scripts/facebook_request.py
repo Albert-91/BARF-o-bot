@@ -1,9 +1,6 @@
-import os
-from abc import ABC
-from enum import Enum
-from typing import Text
 import json
 import logging
+from enum import Enum
 from urllib.parse import urlencode
 
 import requests
@@ -18,51 +15,67 @@ class SenderActionType(Enum):
 
 
 class FacebookRequest:
-    ENDPOINT = "https://graph.facebook.com/v5.0/me/messages"
 
     def __init__(self, token, psid):
         self.token = token
         self.psid = psid
 
-    @property
-    def api_url(self):
-        return self.ENDPOINT + "?" + urlencode({"access_token": self.token})
+    def api_url(self, endpoint):
+        return endpoint + "?" + urlencode({"access_token": self.token})
 
     @property
     def headers(self):
         return {"Content-Type": "application/json"}
 
-    def send_post_request(self, data):
-        r = requests.post(url=self.api_url, data=data, headers=self.headers)
+    def send_post_request(self, data, endpoint):
+        r = requests.post(url=self.api_url(endpoint), data=data, headers=self.headers)
         if 'error' not in r.json().keys():
             print("Success.")
         else:
             print(r.json())
 
-    def send_delete_request(self, data):
-        r = requests.delete(url=self.api_url, data=data, headers=self.headers)
+    def send_delete_request(self, data, endpoint):
+        r = requests.delete(url=self.api_url(endpoint), data=data, headers=self.headers)
         if 'error' not in r.json().keys():
             print("Success.")
         else:
             print(r.json())
 
 
-class SenderActions(FacebookRequest):
+class MessagesRequest(FacebookRequest):
+
+    MESSAGES_ENDPOINT = "https://graph.facebook.com/v5.0/me/messages"
+
+    @property
+    def endpoint(self):
+        return self.MESSAGES_ENDPOINT
+
+
+class MessengerProfileRequest(FacebookRequest):
+
+    MESSENGER_PROFILE_ENDPOINT = "https://graph.facebook.com/v2.6/me/messenger_profile"
+
+    @property
+    def endpoint(self):
+        return self.MESSENGER_PROFILE_ENDPOINT
+
+
+class SenderActions(MessagesRequest):
 
     def __init__(self, token, psid):
         super().__init__(token, psid)
 
     def typing_on(self):
         data = self.data(SenderActionType.TYPING_ON)
-        self.send_post_request(data=data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
 
     def typing_off(self):
         data = self.data(SenderActionType.TYPING_OFF)
-        self.send_post_request(data=data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
 
     def mark_seen(self):
         data = self.data(SenderActionType.MARK_SEEN)
-        self.send_post_request(data=data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
 
     def data(self, action: SenderActionType):
         data = {"recipient": {"id": self.psid}, "sender_action": action.value}
@@ -83,8 +96,4 @@ class GetStartedButton(FacebookRequest):
         data = {"fields": ["get_started"]}
         self.send_delete_request(data=data)
 
-
-
-
-from utils.data_readers import get_page_access_token
 

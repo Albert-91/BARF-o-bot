@@ -167,3 +167,32 @@ class PersistentMenu(MessengerProfileRequest):
         data = {"fields": ["persistent_menu"]}
         data = json.dumps(data)
         self.send_delete_request(data=data, endpoint=self.endpoint)
+
+
+class Greeting(MessengerProfileRequest):
+    """
+    https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/greeting
+
+    Example of data to set:
+    "greeting":[
+        {
+        "locale":"default",
+        "text":"Hello {{user_first_name}}!"
+        }
+    ]
+    """
+
+    def __init__(self, token):
+        super().__init__(token)
+
+    def set(self, actions: List[Dict]):
+        data = {
+            "greeting": actions
+        }
+        data = json.dumps(data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
+
+    def delete(self):
+        data = {"fields": ["greeting"]}
+        data = json.dumps(data)
+        self.send_delete_request(data=data, endpoint=self.endpoint)

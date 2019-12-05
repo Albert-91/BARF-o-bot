@@ -62,6 +62,9 @@ class MessengerProfileRequest(FacebookRequest):
 
 
 class SenderActions(MessagesRequest):
+    """
+    https://developers.facebook.com/docs/messenger-platform/send-messages/sender-actions/
+    """
 
     def __init__(self, token, psid):
         super().__init__(token, psid)
@@ -84,6 +87,9 @@ class SenderActions(MessagesRequest):
 
 
 class GetStartedButton(MessengerProfileRequest):
+    """
+    https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/get-started-button
+    """
 
     def __init__(self, token, intent=None):
         super().__init__(token)
@@ -109,6 +115,9 @@ class GetStartedButton(MessengerProfileRequest):
 
 
 class PersistentMenu(MessengerProfileRequest):
+    """
+    https://developers.facebook.com/docs/messenger-platform/send-messages/persistent-menu
+    """
 
     def __init__(self, token):
         super().__init__(token)

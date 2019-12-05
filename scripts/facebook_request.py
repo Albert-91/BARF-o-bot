@@ -95,7 +95,7 @@ class GetStartedButton(MessengerProfileRequest):
         super().__init__(token)
         self.intent = intent
 
-    def add(self):
+    def set(self):
         """
         Method's setting "Get_Started" button on a Messenger welcome screen for a new users.
         :param intent_name: intent which will be triggered after clicking "get_started" button

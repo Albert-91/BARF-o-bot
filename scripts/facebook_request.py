@@ -16,7 +16,7 @@ class SenderActionType(Enum):
 
 class FacebookRequest:
 
-    def __init__(self, token, psid):
+    def __init__(self, token, psid=None):
         self.token = token
         self.psid = psid
 

@@ -196,3 +196,38 @@ class Greeting(MessengerProfileRequest):
         data = {"fields": ["greeting"]}
         data = json.dumps(data)
         self.send_delete_request(data=data, endpoint=self.endpoint)
+
+
+class IceBreakers(MessengerProfileRequest):
+    """
+    https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/greeting
+
+    Example of data to set:
+    {
+        "ice_breakers":[
+             {
+                "question": "Where are you located?",
+                "payload": "LOCATION_POSTBACK_PAYLOAD",
+             },
+             {
+                "question": "What are your hours?",
+                "payload": "HOURS_POSTBACK_PAYLOAD",
+             }
+        ]
+    }
+    """
+
+    def __init__(self, token):
+        super().__init__(token)
+
+    def set(self, actions: List[Dict]):
+        data = {
+            "ice_breakers": actions
+        }
+        data = json.dumps(data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
+
+    def delete(self):
+        data = {"fields": ["ice_breakers"]}
+        data = json.dumps(data)
+        self.send_delete_request(data=data, endpoint=self.endpoint)

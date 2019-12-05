@@ -82,7 +82,7 @@ class SenderActions(MessagesRequest):
         return json.dumps(data)
 
 
-class GetStartedButton(FacebookRequest):
+class GetStartedButton(MessengerProfileRequest):
 
     def __init__(self, token, psid, intent=None):
         super().__init__(token, psid)
@@ -90,10 +90,10 @@ class GetStartedButton(FacebookRequest):
 
     def add(self):
         data = {"get_started": {"payload": "/" + self.intent}}
-        self.send_post_request(data=data)
+        data = json.dumps(data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
 
     def delete(self):
         data = {"fields": ["get_started"]}
-        self.send_delete_request(data=data)
-
-
+        data = json.dumps(data)
+        self.send_delete_request(data=data, endpoint=self.endpoint)

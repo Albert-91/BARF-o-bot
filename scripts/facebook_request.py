@@ -1,11 +1,12 @@
 import json
 import logging
-import os
 from enum import Enum
 from typing import List, Dict
 from urllib.parse import urlencode
 
 import requests
+
+from utils.data_readers import get_page_access_token
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ class MessengerProfileFields(Enum):
 
 class FacebookRequest:
 
-    def __init__(self, token=os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN'), psid=None):
+    def __init__(self, token=get_page_access_token(), psid=None):
         self.token = token
         self.psid = psid
 
@@ -68,6 +69,10 @@ class MessengerProfileRequest(FacebookRequest):
     def endpoint(self):
         return self.MESSENGER_PROFILE_ENDPOINT
 
+    def set_data(self, data):
+        data = json.dumps(data)
+        self.send_post_request(data=data, endpoint=self.endpoint)
+
 
 class SenderActions(MessagesRequest):
     """
@@ -102,8 +107,7 @@ class MessengerProfile(MessengerProfileRequest):
         :param intent: intent which will be triggered after clicking "get_started" button
         """
         data = {"get_started": {"payload": "/" + intent}}
-        data = json.dumps(data)
-        self.send_post_request(data=data, endpoint=self.endpoint)
+        super().set_data(data)
 
     def set_persistent_menu(self, actions: List[Dict], locale="default", composer_input_disabled=False):
         """
@@ -146,8 +150,7 @@ class MessengerProfile(MessengerProfileRequest):
                 }
             ]
         }
-        data = json.dumps(data)
-        self.send_post_request(data=data, endpoint=self.endpoint)
+        super().set_data(data)
 
     def set_greeting(self, actions: List[Dict]):
         """
@@ -162,8 +165,7 @@ class MessengerProfile(MessengerProfileRequest):
         ]
         """
         data = {"greeting": actions}
-        data = json.dumps(data)
-        self.send_post_request(data=data, endpoint=self.endpoint)
+        super().set_data(data)
 
     def set_ice_breakers(self, actions: List[Dict]):
         """
@@ -184,8 +186,7 @@ class MessengerProfile(MessengerProfileRequest):
         }
         """
         data = {"ice_breakers": actions}
-        data = json.dumps(data)
-        self.send_post_request(data=data, endpoint=self.endpoint)
+        super().set_data(data)
 
     def delete_field(self, field: MessengerProfileFields):
         data = {"fields": [field.value]}

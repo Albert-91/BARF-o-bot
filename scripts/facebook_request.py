@@ -161,9 +161,7 @@ class MessengerProfile(MessengerProfileRequest):
             }
         ]
         """
-        data = {
-            "greeting": actions
-        }
+        data = {"greeting": actions}
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 
@@ -185,9 +183,7 @@ class MessengerProfile(MessengerProfileRequest):
             ]
         }
         """
-        data = {
-            "ice_breakers": actions
-        }
+        data = {"ice_breakers": actions}
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 

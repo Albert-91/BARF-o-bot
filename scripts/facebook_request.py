@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 from enum import Enum
 from typing import List, Dict
 from urllib.parse import urlencode
@@ -15,9 +16,16 @@ class SenderActionType(Enum):
     MARK_SEEN = "mark_seen"
 
 
+class MessengerProfileFields(Enum):
+    GET_STARTED = "get_started"
+    PERSISTENT_MENU = "persistent_menu"
+    GREETING = "greeting"
+    ICE_BREAKERS = "ice_breakers"
+
+
 class FacebookRequest:
 
-    def __init__(self, token, psid=None):
+    def __init__(self, token=os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN'), psid=None):
         self.token = token
         self.psid = psid
 
@@ -86,71 +94,49 @@ class SenderActions(MessagesRequest):
         return json.dumps(data)
 
 
-class GetStartedButton(MessengerProfileRequest):
-    """
-    https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/get-started-button
-    """
+class MessengerProfile(MessengerProfileRequest):
 
-    def __init__(self, token, intent=None):
-        super().__init__(token)
-        self.intent = intent
-
-    def set(self):
+    def set_get_started_button(self, intent):
         """
         Method's setting "Get_Started" button on a Messenger welcome screen for a new users.
-        :param intent_name: intent which will be triggered after clicking "get_started" button
+        :param intent: intent which will be triggered after clicking "get_started" button
         """
-
-        data = {"get_started": {"payload": "/" + self.intent}}
+        data = {"get_started": {"payload": "/" + intent}}
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 
-    def delete(self):
+    def set_persistent_menu(self, actions: List[Dict], locale="default"):
         """
-        Method's removing "Get_Started" button from Messenger welcome screen for a new users.
-        """
-        data = {"fields": ["get_started"]}
-        data = json.dumps(data)
-        self.send_delete_request(data=data, endpoint=self.endpoint)
+         https://developers.facebook.com/docs/messenger-platform/send-messages/persistent-menu
 
-
-class PersistentMenu(MessengerProfileRequest):
-    """
-    https://developers.facebook.com/docs/messenger-platform/send-messages/persistent-menu
-
-    Example of data to set:
-    {
-        "persistent_menu": [
-            {
-                "locale": "default",
-                "composer_input_disabled": false,
-                "call_to_actions": [
-                    {
-                        "type": "postback",
-                        "title": "Talk to an agent",
-                        "payload": "CARE_HELP"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "Outfit suggestions",
-                        "payload": "CURATION"
-                    },
-                    {
-                        "type": "web_url",
-                        "title": "Shop now",
-                        "url": "https://www.originalcoastclothing.com/",
-                        "webview_height_ratio": "full"
-                    }
-                ]
-            }
-        ]
-    }
-    """
-
-    def __init__(self, token):
-        super().__init__(token)
-
-    def set(self, actions: List[Dict], locale="default"):
+         Example of data to set:
+         {
+             "persistent_menu": [
+                 {
+                     "locale": "default",
+                     "composer_input_disabled": false,
+                     "call_to_actions": [
+                         {
+                             "type": "postback",
+                             "title": "Talk to an agent",
+                             "payload": "CARE_HELP"
+                         },
+                         {
+                             "type": "postback",
+                             "title": "Outfit suggestions",
+                             "payload": "CURATION"
+                         },
+                         {
+                             "type": "web_url",
+                             "title": "Shop now",
+                             "url": "https://www.originalcoastclothing.com/",
+                             "webview_height_ratio": "full"
+                         }
+                     ]
+                 }
+             ]
+         }
+         """
         data = {
             "persistent_menu": [
                 {
@@ -163,71 +149,49 @@ class PersistentMenu(MessengerProfileRequest):
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 
-    def delete(self):
-        data = {"fields": ["persistent_menu"]}
-        data = json.dumps(data)
-        self.send_delete_request(data=data, endpoint=self.endpoint)
+    def set_greeting(self, actions: List[Dict]):
+        """
+        https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/greeting
 
-
-class Greeting(MessengerProfileRequest):
-    """
-    https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/greeting
-
-    Example of data to set:
-    "greeting":[
-        {
-        "locale":"default",
-        "text":"Hello {{user_first_name}}!"
-        }
-    ]
-    """
-
-    def __init__(self, token):
-        super().__init__(token)
-
-    def set(self, actions: List[Dict]):
+        Example of data to set:
+        "greeting":[
+            {
+            "locale":"default",
+            "text":"Hello {{user_first_name}}!"
+            }
+        ]
+        """
         data = {
             "greeting": actions
         }
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 
-    def delete(self):
-        data = {"fields": ["greeting"]}
-        data = json.dumps(data)
-        self.send_delete_request(data=data, endpoint=self.endpoint)
+    def set_ice_breakers(self, actions: List[Dict]):
+        """
+        https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/greeting
 
-
-class IceBreakers(MessengerProfileRequest):
-    """
-    https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/greeting
-
-    Example of data to set:
-    {
-        "ice_breakers":[
-             {
-                "question": "Where are you located?",
-                "payload": "LOCATION_POSTBACK_PAYLOAD",
-             },
-             {
-                "question": "What are your hours?",
-                "payload": "HOURS_POSTBACK_PAYLOAD",
-             }
-        ]
-    }
-    """
-
-    def __init__(self, token):
-        super().__init__(token)
-
-    def set(self, actions: List[Dict]):
+        Example of data to set:
+        {
+            "ice_breakers":[
+                 {
+                    "question": "Where are you located?",
+                    "payload": "LOCATION_POSTBACK_PAYLOAD",
+                 },
+                 {
+                    "question": "What are your hours?",
+                    "payload": "HOURS_POSTBACK_PAYLOAD",
+                 }
+            ]
+        }
+        """
         data = {
             "ice_breakers": actions
         }
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 
-    def delete(self):
-        data = {"fields": ["ice_breakers"]}
+    def delete_field(self, field: MessengerProfileFields):
+        data = {"fields": [field.value]}
         data = json.dumps(data)
         self.send_delete_request(data=data, endpoint=self.endpoint)

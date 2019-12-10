@@ -105,7 +105,7 @@ class MessengerProfile(MessengerProfileRequest):
         data = json.dumps(data)
         self.send_post_request(data=data, endpoint=self.endpoint)
 
-    def set_persistent_menu(self, actions: List[Dict], locale="default"):
+    def set_persistent_menu(self, actions: List[Dict], locale="default", composer_input_disabled=False):
         """
          https://developers.facebook.com/docs/messenger-platform/send-messages/persistent-menu
 
@@ -141,7 +141,7 @@ class MessengerProfile(MessengerProfileRequest):
             "persistent_menu": [
                 {
                     "locale": locale,
-                    "composer_input_disabled": False,
+                    "composer_input_disabled": composer_input_disabled,
                     "call_to_actions": actions
                 }
             ]

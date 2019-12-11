@@ -188,7 +188,8 @@ class MessengerProfile(MessengerProfileRequest):
         data = {"ice_breakers": actions}
         super().set_data(data)
 
-    def delete_field(self, field: MessengerProfileFields):
-        data = {"fields": [field.value]}
+    def delete_fields(self, fields: List[MessengerProfileFields]):
+        fields_list = [field.value for field in fields]
+        data = {"fields": fields_list}
         data = json.dumps(data)
         self.send_delete_request(data=data, endpoint=self.endpoint)

@@ -1,7 +1,7 @@
 import json
 import logging
 from enum import Enum
-from typing import List, Dict
+from typing import List, Dict, Text
 from urllib.parse import urlencode
 
 import requests
@@ -101,7 +101,7 @@ class SenderActions(MessagesRequest):
 
 class MessengerProfile(MessengerProfileRequest):
 
-    def set_get_started_button(self, intent):
+    def set_get_started_button(self, intent: Text):
         """
         Method's setting "Get_Started" button on a Messenger welcome screen for a new users.
         :param intent: intent which will be triggered after clicking "get_started" button

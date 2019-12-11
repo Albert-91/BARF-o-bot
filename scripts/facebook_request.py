@@ -40,14 +40,14 @@ class FacebookRequest:
     def send_post_request(self, data, endpoint):
         r = requests.post(url=self.api_url(endpoint), data=data, headers=self.headers)
         if 'error' not in r.json().keys():
-            print("Success.")
+            return True
         else:
             print(r.json())
 
     def send_delete_request(self, data, endpoint):
         r = requests.delete(url=self.api_url(endpoint), data=data, headers=self.headers)
         if 'error' not in r.json().keys():
-            print("Success.")
+            return True
         else:
             print(r.json())
 
@@ -70,8 +70,11 @@ class MessengerProfileRequest(FacebookRequest):
         return self.MESSENGER_PROFILE_ENDPOINT
 
     def set_data(self, data):
-        data = json.dumps(data)
-        self.send_post_request(data=data, endpoint=self.endpoint)
+        json_data = json.dumps(data)
+        r = self.send_post_request(data=json_data, endpoint=self.endpoint)
+        keys = [i for i in data.keys()]
+        if r:
+            print("Successfully set '%s' on messenger profile." % keys[0])
 
 
 class SenderActions(MessagesRequest):
@@ -192,4 +195,6 @@ class MessengerProfile(MessengerProfileRequest):
         fields_list = [field.value for field in fields]
         data = {"fields": fields_list}
         data = json.dumps(data)
-        self.send_delete_request(data=data, endpoint=self.endpoint)
+        r = self.send_delete_request(data=data, endpoint=self.endpoint)
+        if r:
+            print("Successfully deleted: %s." % ", ".join(repr(i) for i in fields_list))

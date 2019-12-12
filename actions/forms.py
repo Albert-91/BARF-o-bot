@@ -10,7 +10,7 @@ from rasa_sdk.forms import FormAction
 
 from utils.products_calculator import calculate_products_to_buy, calculate_ingredients_distribution
 from utils.string import get_correct_week_word
-from .settings import *
+from config.settings import *
 
 
 class CalculateProductsToBuyForm(FormAction):

@@ -6,8 +6,6 @@ from urllib.parse import urlencode
 
 import requests
 
-from utils.data_readers import get_page_access_token
-
 logger = logging.getLogger(__name__)
 
 
@@ -26,7 +24,7 @@ class MessengerProfileFields(Enum):
 
 class FacebookRequest:
 
-    def __init__(self, token=get_page_access_token(), psid=None):
+    def __init__(self, token, psid=None):
         self.token = token
         self.psid = psid
 

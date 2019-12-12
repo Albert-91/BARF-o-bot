@@ -16,5 +16,3 @@ else
     touch $ENV_FILE_NAME
     echo "$ENV_FILE_NAME file created"
 fi
-
-python3 -m scripts.messenger_profile

@@ -15,7 +15,6 @@ services:
       - ./facebook:/app/facebook
       - ./logs:/app/logs
       - ./models:/app/models
-      - ./scripts:/app/scripts
     ports:
       - 5101:5005
     env_file:

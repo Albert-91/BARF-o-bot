@@ -12,7 +12,7 @@ services:
     volumes:
       - ./actions:/app/actions
       - ./config:/app/config
-      - ./connectors:/app/connectors
+      - ./facebook:/app/facebook
       - ./logs:/app/logs
       - ./models:/app/models
       - ./scripts:/app/scripts

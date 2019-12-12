@@ -10,3 +10,7 @@ def set_messenger_profile():
     messenger_profile.set_greeting(GREETING_ACTIONS)
     messenger_profile.set_ice_breakers(ICE_BREAKERS_ACTIONS)
     messenger_profile.set_persistent_menu(PERSISTENT_MENU_ACTIONS)
+
+
+if __name__ == '__main__':
+    set_messenger_profile()

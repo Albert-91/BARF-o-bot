@@ -50,6 +50,10 @@ To deploy:
     POSTGRES_PASSWORD=
     WEATHERSTACK_API_KEY=
     ```
+1. Set Messenger Profile features like "Get Started" button, "Ice Breakers", "Greeting" and "Persistent Menu", setting content of these features in `config/settings.py` and enter command:
+    ```bash
+    python3 -m scripts.messenger_profile
+    ```
 1. Run stack named "barfobot":
    ```bash
    docker stack deploy -c docker-compose.yml barfobot

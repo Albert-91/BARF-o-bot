@@ -10,7 +10,7 @@ else
 fi
 
 ENV_FILE_NAME=.env
-if [ -f "$ENV_FILE_NAME" ]; then
+if [[ -f "$ENV_FILE_NAME" ]]; then
     echo "$ENV_FILE_NAME file exists"
 else
     touch $ENV_FILE_NAME

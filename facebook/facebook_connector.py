@@ -13,9 +13,9 @@ from rasa.core.channels.channel import UserMessage, OutputChannel, InputChannel
 from sanic import Blueprint, response
 from sanic.request import Request
 
-from actions.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME, \
+from config.settings import DEFAULT_TYPING_TIME, AVARAGE_SIGN_PER_SECOND, MAXIMUM_TYPING_TIME, MINIMUM_TYPING_TIME, \
     TIME_FROM_MARK_SEEN_TO_TYPING
-from scripts.facebook_request import SenderActions
+from facebook.facebook_request import SenderActions
 
 logger = logging.getLogger(__name__)
 

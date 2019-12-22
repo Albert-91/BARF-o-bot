@@ -1,4 +1,4 @@
 environs==6.1.0
-rasa==1.4.3
+rasa==1.6.0
 pandas==0.24.2
 requests==2.22.0

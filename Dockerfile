@@ -1,5 +1,5 @@
 # Extend the official Rasa SDK image
-FROM rasa/rasa-sdk:1.4.0
+FROM rasa/rasa-sdk:1.6.0
 
 WORKDIR /app
 

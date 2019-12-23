@@ -33,7 +33,7 @@ class CalculateProductsToBuyForm(FormAction):
             if not 1 < meat_amount <= MEAT_AMOUNT_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
-            dispatcher.utter_template('utter_wrong_meat_amount', tracker)
+            dispatcher.utter_message(template='utter_wrong_meat_amount')
             return {'meat_amount': None}
         return {'meat_amount': str(value[0])}
 
@@ -43,9 +43,9 @@ class CalculateProductsToBuyForm(FormAction):
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         meat_amount = Decimal(tracker.get_slot('meat_amount'))
-        dispatcher.utter_template('utter_loan_summarize', tracker)
+        dispatcher.utter_message(template='utter_loan_summarize')
         products_amounts = calculate_products_to_buy(meat_amount)
-        dispatcher.utter_template('utter_summarize_products_to_buy_form', tracker,
+        dispatcher.utter_message(template='utter_summarize_products_to_buy_form',
                                   meat_amount=int(meat_amount),
                                   liver_amount=float(self.round_number(products_amounts['liver'], 2)),
                                   offal_amount=float(self.round_number(products_amounts['offal'], 2)),
@@ -75,7 +75,7 @@ class CalculateIngredientsDistribution(FormAction):
             if not 1 < daily_portion <= DAILY_PORTION_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
-            dispatcher.utter_template('utter_wrong_daily_portion', tracker)
+            dispatcher.utter_message(template='utter_wrong_daily_portion')
             return {'daily_portion': None}
         return {'daily_portion': str(value[0])}
 
@@ -86,7 +86,7 @@ class CalculateIngredientsDistribution(FormAction):
             if not 1 < weekly_cycle <= WEEKLY_CYCLE_UPPER_LIMIT:
                 raise ValueError
         except (ValueError, TypeError):
-            dispatcher.utter_template('utter_wrong_weekly_cycle', tracker)
+            dispatcher.utter_message(template='utter_wrong_weekly_cycle')
             return {'weekly_cycle': None}
         return {'weekly_cycle': str(value[0])}
 
@@ -99,7 +99,7 @@ class CalculateIngredientsDistribution(FormAction):
         daily_portion = Decimal(tracker.get_slot('daily_portion'))
         week = get_correct_week_word(weekly_cycle)
         ingredients = calculate_ingredients_distribution(weekly_cycle, daily_portion)
-        dispatcher.utter_template('utter_summarize_ingredients_distribution_form', tracker,
+        dispatcher.utter_message(template='utter_summarize_ingredients_distribution_form',
                                   weekly_cycle=int(weekly_cycle),
                                   daily_portion=int(daily_portion),
                                   week=week,
@@ -130,13 +130,13 @@ class WeatherForm(FormAction):
         response = requests.get(url)
         try:
             current_data = response.json()['current']
-            dispatcher.utter_template('utter_summarize_weather_form', tracker,
+            dispatcher.utter_message(template='utter_summarize_weather_form',
                                       temperature=current_data['temperature'],
                                       feelslike=current_data['feelslike'],
                                       pressure=current_data['pressure'],
                                       humidity=current_data['humidity'])
         except KeyError:
-            dispatcher.utter_template('utter_summarize_exception', tracker)
+            dispatcher.utter_message(template='utter_summarize_exception')
         return []
 
 
@@ -167,6 +167,6 @@ class FeedbackForm(FormAction):
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
         if tracker.get_slot('feedback_value') in ['positive', 'negative']:
-            dispatcher.utter_template('utter_thanks_for_feedback', tracker)
+            dispatcher.utter_message(template='utter_thanks_for_feedback')
         return [SlotSet('feedback_value', None), SlotSet('feedback_message', None),
                 SlotSet('give_feedback_message', None)]

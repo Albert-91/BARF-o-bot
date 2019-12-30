@@ -12,18 +12,14 @@ class ProductsRatio(Enum):
 
 def calculate_products_to_buy(meat_amount: Decimal) -> Dict[Text, Decimal]:
     """
-    Function gets amount of meat and depends on ratio of each product returns a dictionary with weights of all products.
+    Function gets amount of meat and depends on ratio of each product returns a dictionary with
+    weights of rest of all products.
     :param meat_amount: in "kg" unit
     :return: dictionary with values in "kg" unit of liver, offal and bones
     """
-    liver_to_buy = meat_amount * Decimal(ProductsRatio.LIVER.value) / Decimal(ProductsRatio.MEAT.value)
-    offal_to_buy = meat_amount * Decimal(ProductsRatio.OFFAL.value) / Decimal(ProductsRatio.MEAT.value)
-    bones_to_buy = meat_amount * Decimal(ProductsRatio.BONES.value) / Decimal(ProductsRatio.MEAT.value)
-    return {
-        "liver": liver_to_buy,
-        "offal": offal_to_buy,
-        "bones": bones_to_buy,
-    }
+
+    products = [ProductsRatio.LIVER, ProductsRatio.OFFAL, ProductsRatio.BONES]
+    return {product.name:(meat_amount * Decimal(product.value) / Decimal(ProductsRatio.MEAT.value)) for product in products}
 
 
 def calculate_ingredients_distribution(weekly_cycle: Decimal, daily_portion: Decimal) -> Dict[Text, Decimal]:

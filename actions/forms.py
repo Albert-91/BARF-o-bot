@@ -8,7 +8,7 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
-from utils.products_calculator import calculate_products_to_buy, calculate_ingredients_distribution
+from utils.products_calculator import calculate_products_to_buy, calculate_ingredients_distribution, ProductsRatio
 from utils.string import get_correct_week_word
 from config.settings import *
 
@@ -47,9 +47,9 @@ class CalculateProductsToBuyForm(FormAction):
         products_amounts = calculate_products_to_buy(meat_amount)
         dispatcher.utter_message(template='utter_summarize_products_to_buy_form',
                                   meat_amount=int(meat_amount),
-                                  liver_amount=float(self.round_number(products_amounts['liver'], 2)),
-                                  offal_amount=float(self.round_number(products_amounts['offal'], 2)),
-                                  bones_amount=float(self.round_number(products_amounts['bones'], 2)))
+                                  liver_amount=float(self.round_number(products_amounts[ProductsRatio.LIVER.name], 2)),
+                                  offal_amount=float(self.round_number(products_amounts[ProductsRatio.OFFAL.name], 2)),
+                                  bones_amount=float(self.round_number(products_amounts[ProductsRatio.BONES.name], 2)))
         return []
 
 

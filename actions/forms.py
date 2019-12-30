@@ -103,10 +103,10 @@ class CalculateIngredientsDistribution(FormAction):
                                   weekly_cycle=int(weekly_cycle),
                                   daily_portion=int(daily_portion),
                                   week=week,
-                                  meat_amount=int(ingredients['meat']),
-                                  liver_amount=int(ingredients['liver']),
-                                  offal_amount=int(ingredients['offal']),
-                                  bones_amount=int(ingredients['bones']))
+                                  meat_amount=int(ingredients[ProductsRatio.MEAT.name]),
+                                  liver_amount=int(ingredients[ProductsRatio.LIVER.name]),
+                                  offal_amount=int(ingredients[ProductsRatio.OFFAL.name]),
+                                  bones_amount=int(ingredients[ProductsRatio.BONES.name]))
         return []
 
 

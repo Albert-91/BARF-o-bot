@@ -19,7 +19,7 @@ def calculate_products_to_buy(meat_amount: Decimal) -> Dict[Text, Decimal]:
     """
 
     products = [ProductsRatio.LIVER, ProductsRatio.OFFAL, ProductsRatio.BONES]
-    return {product.name:(meat_amount * Decimal(product.value) / Decimal(ProductsRatio.MEAT.value)) for product in products}
+    return {product.name: (meat_amount * Decimal(product.value) / Decimal(ProductsRatio.MEAT.value)) for product in products}
 
 
 def calculate_ingredients_distribution(weekly_cycle: Decimal, daily_portion: Decimal) -> Dict[Text, Decimal]:
@@ -31,13 +31,5 @@ def calculate_ingredients_distribution(weekly_cycle: Decimal, daily_portion: Dec
     :return: dictionary with values in "kg" unit of each product in cycle
     """
     total_cycle_food = daily_portion * Decimal(7) * weekly_cycle
-    liver_to_cycle = Decimal(ProductsRatio.LIVER.value) * total_cycle_food
-    meat_to_cycle = Decimal(ProductsRatio.MEAT.value) * total_cycle_food
-    offal_to_cycle = Decimal(ProductsRatio.OFFAL.value) * total_cycle_food
-    bones_to_cycle = Decimal(ProductsRatio.BONES.value) * total_cycle_food
-    return {
-        "liver": liver_to_cycle,
-        "meat": meat_to_cycle,
-        "offal": offal_to_cycle,
-        "bones": bones_to_cycle,
-    }
+    ingredients = [p for p in ProductsRatio]
+    return {ingredient.name: (Decimal(ingredient.value) * total_cycle_food) for ingredient in ingredients}

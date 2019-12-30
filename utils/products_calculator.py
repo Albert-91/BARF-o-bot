@@ -30,6 +30,7 @@ def calculate_ingredients_distribution(weekly_cycle: Decimal, daily_portion: Dec
     :param daily_portion: Decimal
     :return: dictionary with values in "kg" unit of each product in cycle
     """
+
     total_cycle_food = daily_portion * Decimal(7) * weekly_cycle
     ingredients = [p for p in ProductsRatio]
     return {ingredient.name: (Decimal(ingredient.value) * total_cycle_food) for ingredient in ingredients}

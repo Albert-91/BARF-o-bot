@@ -22,7 +22,7 @@ class RestartBotAction(Action):
         return 'action_restart'
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
-        dispatcher.utter_template('utter_restart', tracker, silent_fail=True)
+        dispatcher.utter_message(template='utter_restart', silent_fail=True)
         return [Restarted(), AllSlotsReset()]
 
 
@@ -72,7 +72,7 @@ class ActionDefaultFallback(CommonActionMixin, Action):
         if not tracker.get_slot('conf.use_generic_out_of_scope_intent_injection_in_fallback_action'):
 
             # default behavior
-            dispatcher.utter_template('utter_default', tracker)
+            dispatcher.utter_message(template='utter_default')
             return [UserUtteranceReverted()]
         else:
             # find last user utterance event (contains intent and its confidence / data)
@@ -85,7 +85,7 @@ class ActionDefaultFallback(CommonActionMixin, Action):
             if not last_user_utterance_event:
                 # just in case... run "default" behaviour
                 logger.error("No last user utterance found, unexpected behavior!")
-                dispatcher.utter_template('utter_default', tracker)
+                dispatcher.utter_message(template='utter_default')
                 return [UserUtteranceReverted()]
 
             logger.debug(f"\nlatest user utterance event found: {last_user_utterance_event}\n")

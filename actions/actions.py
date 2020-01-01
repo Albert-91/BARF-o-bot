@@ -143,7 +143,7 @@ class UtterWrongRequestedSlotValueAction(Action):
         return 'action_utter_wrong_requested_slot_value'
 
     def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_template('utter_wrong_' + tracker.get_slot('requested_slot'), tracker)
+        dispatcher.utter_message(template='utter_wrong_' + tracker.get_slot('requested_slot'))
         return []
 
 
@@ -158,5 +158,5 @@ class UtterExplainRequestedSlotAction(Action):
         return 'action_utter_explain_requested_slot_value'
 
     def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_template('utter_explain_' + tracker.get_slot('requested_slot'), tracker)
+        dispatcher.utter_message(template='utter_explain_' + tracker.get_slot('requested_slot'))
         return []

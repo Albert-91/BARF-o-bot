@@ -1,6 +1,6 @@
 from decimal import Decimal
 from enum import Enum
-from typing import Dict, Text
+from typing import Dict, Text, List
 
 
 class ProductsRatio(Enum):
@@ -8,6 +8,10 @@ class ProductsRatio(Enum):
     OFFAL = 0.2
     BONES = 0.3
     MEAT = 1 - LIVER - OFFAL - BONES
+
+    @staticmethod
+    def get_all_products() -> List:
+        return list(map(lambda c: c, ProductsRatio))
 
 
 def calculate_products_to_buy(meat_amount: Decimal) -> Dict[Text, Decimal]:
@@ -18,8 +22,9 @@ def calculate_products_to_buy(meat_amount: Decimal) -> Dict[Text, Decimal]:
     :return: dictionary with values in "kg" unit of liver, offal and bones
     """
 
-    products = [ProductsRatio.LIVER, ProductsRatio.OFFAL, ProductsRatio.BONES]
-    return {product.name: (meat_amount * Decimal(product.value) / Decimal(ProductsRatio.MEAT.value)) for product in products}
+    products = ProductsRatio.get_all_products()
+    return {product.name: (meat_amount * Decimal(product.value) / Decimal(ProductsRatio.MEAT.value))
+            for product in products if product is not ProductsRatio.MEAT}
 
 
 def calculate_ingredients_distribution(weekly_cycle: Decimal, daily_portion: Decimal) -> Dict[Text, Decimal]:
@@ -32,5 +37,4 @@ def calculate_ingredients_distribution(weekly_cycle: Decimal, daily_portion: Dec
     """
 
     total_cycle_food = daily_portion * Decimal(7) * weekly_cycle
-    ingredients = [p for p in ProductsRatio]
-    return {ingredient.name: (Decimal(ingredient.value) * total_cycle_food) for ingredient in ingredients}
+    return {ingredient.name: (Decimal(ingredient.value) * total_cycle_food) for ingredient in ProductsRatio.get_all_products()}

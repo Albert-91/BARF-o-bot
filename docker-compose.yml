@@ -44,8 +44,6 @@ services:
       - ./actions:/app/actions
       - ./config:/app/config
       - ./utils:/app/utils
-    ports:
-      - 5102:5055
     env_file:
       - .env
     command:
@@ -62,8 +60,6 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    ports:
-      - 9000:9000
     command:
       - duckling-example-exe
       - --no-access-log
@@ -78,8 +74,6 @@ services:
     image: postgres:latest
     volumes:
       - ./db_storage:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
     env_file:
       - .env
     deploy:
